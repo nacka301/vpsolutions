@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # VP Solutions - Portfolio Web Stranica
 
 Moderna prezentacijska web stranica za usluge web developmenta, aplikacija i digitalnog marketinga.
@@ -107,3 +108,6 @@ vercel --prod
 
 **Izradio:** David
 **Made with ❤️ in Croatia**
+=======
+# vpsolutions
+>>>>>>> 5bdcf2cd674c0ef51b0c167b0d37c8963e505c7a
