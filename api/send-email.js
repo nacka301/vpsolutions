@@ -1,7 +1,7 @@
 // Vercel Serverless funkcija za slanje emaila preko Brevo (Sendinblue)
 const SibApiV3Sdk = require('sib-api-v3-sdk');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Samo POST metoda
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
