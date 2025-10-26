@@ -85,10 +85,15 @@ ${message}
     return res.status(200).json({ success: true, message: 'Email poslan!' });
   } catch (error) {
     console.error('Brevo greška:', error);
+    console.error('Error response:', error.response);
+    console.error('Error body:', error.response ? error.response.body : 'No body');
+    
     return res.status(500).json({ 
       success: false, 
       error: 'Greška pri slanju emaila',
-      details: error.message 
+      details: error.message,
+      brevoError: error.response ? error.response.text : 'Nema dodatnih informacija',
+      apiKey: process.env.BREVO_API_KEY ? 'API key postoji' : 'API key NEDOSTAJE!'
     });
   }
 }

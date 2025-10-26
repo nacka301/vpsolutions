@@ -121,13 +121,20 @@ if (contactForm) {
                 formStatus.style.display = 'block';
                 contactForm.reset();
             } else {
-                // Greška
-                formStatus.textContent = `❌ ${result.error || 'Došlo je do greške. Pokušajte ponovo ili me kontaktirajte direktno na WhatsApp.'}`;
+                // Greška - prikaži detaljne informacije
+                console.error('API Error Response:', result);
+                let errorMsg = result.error || 'Došlo je do greške';
+                if (result.details) errorMsg += ` (${result.details})`;
+                if (result.brevoError) errorMsg += `\n\nBrevo: ${result.brevoError}`;
+                if (result.apiKey) errorMsg += `\n${result.apiKey}`;
+                
+                formStatus.textContent = `❌ ${errorMsg}`;
                 formStatus.className = 'form-status error';
                 formStatus.style.display = 'block';
             }
         } catch (error) {
-            formStatus.textContent = '❌ Došlo je do greške. Molim Vas kontaktirajte me direktno putem WhatsApp ili emaila.';
+            console.error('Network/Parse Error:', error);
+            formStatus.textContent = `❌ Network greška: ${error.message}. Kontaktirajte me na WhatsApp.`;
             formStatus.className = 'form-status error';
             formStatus.style.display = 'block';
         }
