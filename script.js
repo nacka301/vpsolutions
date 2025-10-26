@@ -64,13 +64,27 @@ document.querySelectorAll('.service-card, .portfolio-item, .stat-item').forEach(
     observer.observe(el);
 });
 
-// Kontakt forma sa SendGrid (preko Vercel serverless funkcije)
+// Kontakt forma sa rate limiting i GDPR
 const contactForm = document.querySelector('.contact-form');
 const formStatus = document.querySelector('.form-status');
+
+// Rate limiting - sprečava spam
+let lastSubmitTime = 0;
+const SUBMIT_COOLDOWN = 60000; // 1 minuta između submita
 
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        // Provjera rate limiting
+        const now = Date.now();
+        if (now - lastSubmitTime < SUBMIT_COOLDOWN) {
+            const remainingSeconds = Math.ceil((SUBMIT_COOLDOWN - (now - lastSubmitTime)) / 1000);
+            formStatus.textContent = `⏱️ Molimo pričekajte ${remainingSeconds} sekundi prije ponovnog slanja.`;
+            formStatus.className = 'form-status error';
+            formStatus.style.display = 'block';
+            return;
+        }
         
         const button = contactForm.querySelector('button[type="submit"]');
         const originalText = button.textContent;
@@ -101,13 +115,14 @@ if (contactForm) {
             
             if (response.ok && result.success) {
                 // Uspješno poslano
+                lastSubmitTime = now; // Postavi vrijeme zadnjeg submita
                 formStatus.textContent = '✅ Hvala! Vaš upit je poslan. Odgovorit ću Vam na email u najkraćem roku.';
                 formStatus.className = 'form-status success';
                 formStatus.style.display = 'block';
                 contactForm.reset();
             } else {
                 // Greška
-                formStatus.textContent = '❌ Došlo je do greške. Pokušajte ponovo ili me kontaktirajte direktno na WhatsApp.';
+                formStatus.textContent = `❌ ${result.error || 'Došlo je do greške. Pokušajte ponovo ili me kontaktirajte direktno na WhatsApp.'}`;
                 formStatus.className = 'form-status error';
                 formStatus.style.display = 'block';
             }

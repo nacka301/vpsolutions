@@ -329,6 +329,14 @@
                     <input type="email" name="email" placeholder="Email adresa" required>
                     <input type="tel" name="phone" placeholder="Telefon (opcionalno)">
                     <textarea name="message" placeholder="Opišite svoj projekt ili što Vas zanima..." rows="5" required></textarea>
+                    
+                    <div class="gdpr-checkbox">
+                        <label>
+                            <input type="checkbox" name="gdpr" id="gdprConsent" required>
+                            <span>Slažem se s <a href="privacy.html" target="_blank" style="color: #667eea; text-decoration: underline;">Politikom Privatnosti</a> i pristankom na obradu osobnih podataka *</span>
+                        </label>
+                    </div>
+                    
                     <p class="form-notice">📧 Odgovorit ću Vam na email u roku 24 sata</p>
                     <button type="submit" class="btn btn-primary">Pošaljite upit</button>
                     <div class="form-status"></div>
@@ -341,7 +349,10 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 VP Solutions - Web Developer. Sva prava pridržana.</p>
-            <p>Profesionalna izrada web stranica, aplikacija i digitalni marketing</p>
+            <p>
+                <a href="privacy.html" style="color: #667eea; text-decoration: none; margin-right: 20px;">Politika Privatnosti</a>
+                Profesionalna izrada web stranica, aplikacija i digitalni marketing
+            </p>
         </div>
     </footer>
 
