@@ -1,4 +1,4 @@
-// Vercel Serverless funkcija za slanje emaila preko Brevo (Sendinblue)
+// Vercel Serverless funkcija za slanje emaila preko Brevo (Sendinblue) + hCaptcha verifikacija
 const SibApiV3Sdk = require('sib-api-v3-sdk');
 
 module.exports = async function handler(req, res) {
@@ -12,11 +12,60 @@ module.exports = async function handler(req, res) {
   const apiKey = defaultClient.authentications['api-key'];
   apiKey.apiKey = process.env.BREVO_API_KEY;
 
-  const { name, email, phone, message } = req.body;
+  const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '';
+  const {
+    formType,
+    name,
+    email,
+    phone,
+    message,
+    website,
+    business,
+    goals,
+    captcha
+  } = req.body || {};
+
+  // hCaptcha server-side verifikacija (obavezno)
+  try {
+    const secret = process.env.HCAPTCHA_SECRET;
+    if (!captcha) {
+      return res.status(400).json({ error: 'Molimo potvrdite da niste robot (hCaptcha).' });
+    }
+    if (!secret) {
+      return res.status(500).json({ error: 'Captcha konfiguracija nije postavljena. Kontaktirajte administratora.' });
+    }
+
+    const params = new URLSearchParams();
+    params.append('secret', secret);
+    params.append('response', captcha);
+    if (ip) params.append('remoteip', Array.isArray(ip) ? ip[0] : String(ip));
+
+    const verifyResp = await fetch('https://hcaptcha.com/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params
+    });
+    const verifyJson = await verifyResp.json();
+    if (!verifyJson.success) {
+      return res.status(400).json({ error: 'Captcha verifikacija nije uspjela. Pokušajte ponovo.' });
+    }
+  } catch (e) {
+    console.error('hCaptcha verify error:', e);
+    return res.status(500).json({ error: 'Greška pri verifikaciji captcha-e.' });
+  }
 
   // Validacija i sanitizacija inputa
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Molimo popunite sva obavezna polja' });
+  const isAudit = (formType === 'audit');
+
+  // Validacija polja po tipu forme
+  if (isAudit) {
+    if (!email || !website) {
+      return res.status(400).json({ error: 'Molimo unesite email i URL web stranice.' });
+    }
+  } else {
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Molimo popunite sva obavezna polja' });
+    }
   }
 
   // Email validacija
@@ -37,37 +86,69 @@ module.exports = async function handler(req, res) {
     return text.replace(/[&<>"']/g, m => map[m]);
   };
 
-  const safeName = escapeHtml(name);
-  const safeEmail = escapeHtml(email);
-  const safePhone = phone ? escapeHtml(phone) : 'Nije navedeno';
-  const safeMessage = escapeHtml(message);
+  const safe = (v) => v ? escapeHtml(String(v)) : '';
+  const safeName = safe(name) || 'Nije navedeno';
+  const safeEmail = safe(email);
+  const safePhone = phone ? safe(phone) : 'Nije navedeno';
+  const safeMessage = safe(message);
+  const safeWebsite = safe(website);
+  const safeBusiness = safe(business) || 'Nije navedeno';
+  const safeGoals = safe(goals) || 'Nije navedeno';
 
   // Email koji će se poslati tebi
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
-  
-  sendSmtpEmail.subject = `Novi upit sa stranice - ${safeName}`;
   sendSmtpEmail.to = [{ email: 'vpsolutions.booking@gmail.com', name: 'VP Solutions' }];
-  sendSmtpEmail.replyTo = { email: email, name: safeName };
   sendSmtpEmail.sender = { email: 'vpsolutions.booking@gmail.com', name: 'VP Solutions Website' };
-  
-  sendSmtpEmail.htmlContent = `
-    <html>
-      <body style="font-family: Arial, sans-serif; padding: 20px;">
-        <h2 style="color: #6366f1;">Novi upit sa stranice</h2>
-        <div style="background: #f8fafc; padding: 20px; border-radius: 10px; margin: 20px 0;">
-          <p><strong>Ime:</strong> ${safeName}</p>
-          <p><strong>Email:</strong> <a href="mailto:${email}">${safeEmail}</a></p>
-          <p><strong>Telefon:</strong> ${safePhone}</p>
-        </div>
-        <h3 style="color: #334155;">Poruka:</h3>
-        <div style="background: #ffffff; padding: 15px; border-left: 4px solid #6366f1;">
-          <p>${safeMessage.replace(/\n/g, '<br>')}</p>
-        </div>
-      </body>
-    </html>
-  `;
-  
-  sendSmtpEmail.textContent = `
+
+  if (isAudit) {
+    sendSmtpEmail.subject = `Novi mini‑audit zahtjev - ${safeWebsite}`;
+    sendSmtpEmail.replyTo = { email: email, name: safeBusiness !== 'Nije navedeno' ? safeBusiness : 'Audit korisnik' };
+    sendSmtpEmail.htmlContent = `
+      <html>
+        <body style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #6366f1;">Novi mini‑audit zahtjev</h2>
+          <div style="background: #f8fafc; padding: 20px; border-radius: 10px; margin: 20px 0;">
+            <p><strong>Web:</strong> <a href="${safeWebsite}" target="_blank" rel="noopener">${safeWebsite}</a></p>
+            <p><strong>Brand/tvrtka:</strong> ${safeBusiness}</p>
+            <p><strong>Email:</strong> <a href="mailto:${email}">${safeEmail}</a></p>
+          </div>
+          <h3 style="color: #334155;">Ciljevi / napomena:</h3>
+          <div style="background: #ffffff; padding: 15px; border-left: 4px solid #6366f1;">
+            <p>${safeGoals.replace(/\n/g, '<br>')}</p>
+          </div>
+        </body>
+      </html>
+    `;
+    sendSmtpEmail.textContent = `
+Mini-audit zahtjev
+
+Web: ${website}
+Brand/tvrtka: ${business || 'Nije navedeno'}
+Email: ${email}
+
+Ciljevi/napomena:
+${goals || ''}
+    `;
+  } else {
+    sendSmtpEmail.subject = `Novi upit sa stranice - ${safeName}`;
+    sendSmtpEmail.replyTo = { email: email, name: safeName };
+    sendSmtpEmail.htmlContent = `
+      <html>
+        <body style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #6366f1;">Novi upit sa stranice</h2>
+          <div style="background: #f8fafc; padding: 20px; border-radius: 10px; margin: 20px 0;">
+            <p><strong>Ime:</strong> ${safeName}</p>
+            <p><strong>Email:</strong> <a href=\"mailto:${email}\">${safeEmail}</a></p>
+            <p><strong>Telefon:</strong> ${safePhone}</p>
+          </div>
+          <h3 style="color: #334155;">Poruka:</h3>
+          <div style="background: #ffffff; padding: 15px; border-left: 4px solid #6366f1;">
+            <p>${safeMessage.replace(/\n/g, '<br>')}</p>
+          </div>
+        </body>
+      </html>
+    `;
+    sendSmtpEmail.textContent = `
 Novi upit sa stranice
 
 Ime: ${name}
@@ -76,12 +157,40 @@ Telefon: ${phone || 'Nije navedeno'}
 
 Poruka:
 ${message}
-  `;
+    `;
+  }
 
   try {
     const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
     await apiInstance.sendTransacEmail(sendSmtpEmail);
-    
+
+    // Auto‑odgovor korisniku
+    if (email) {
+      try {
+        const ack = new SibApiV3Sdk.SendSmtpEmail();
+        ack.to = [{ email: email }];
+        ack.sender = { email: 'vpsolutions.booking@gmail.com', name: 'VP Solutions' };
+        ack.subject = isAudit ? 'Mini‑audit zaprimljen ✅' : 'Vaš upit je zaprimljen ✅';
+        ack.htmlContent = isAudit
+          ? `
+          <p>Pozdrav${safeBusiness && safeBusiness !== 'Nije navedeno' ? ' ' + safeBusiness : ''},</p>
+          <p>Hvala Vam na interesu za mini‑audit. Pregledat ću stranicu <a href="${safeWebsite}">${safeWebsite}</a> i u roku 24 sata poslati 3 konkretne preporuke kako povećati broj upita.</p>
+          <p>Lijep pozdrav,<br>VP Solutions</p>
+          `
+          : `
+          <p>Pozdrav ${safeName !== 'Nije navedeno' ? safeName : ''},</p>
+          <p>Hvala na poruci! Javit ću Vam se u roku 24 sata s povratnim informacijama.</p>
+          <blockquote style="border-left: 4px solid #6366f1; padding-left: 10px; color:#334155;">
+            ${safeMessage.replace(/\n/g, '<br>')}
+          </blockquote>
+          <p>Lijep pozdrav,<br>VP Solutions</p>
+          `;
+        await apiInstance.sendTransacEmail(ack);
+      } catch (ackErr) {
+        console.warn('Auto-ack email failed:', ackErr?.message);
+      }
+    }
+
     return res.status(200).json({ success: true, message: 'Email poslan!' });
   } catch (error) {
     console.error('Brevo greška:', error);

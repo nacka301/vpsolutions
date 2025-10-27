@@ -99,7 +99,8 @@ if (contactForm) {
             name: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
-            message: formData.get('message')
+            message: formData.get('message'),
+            captcha: formData.get('h-captcha-response') || ''
         };
         
         try {
@@ -147,6 +148,59 @@ if (contactForm) {
         setTimeout(() => {
             formStatus.style.display = 'none';
         }, 7000);
+    });
+}
+
+// Mini‑audit forma
+const auditForm = document.querySelector('#auditForm');
+const auditStatus = document.querySelector('#auditStatus');
+
+if (auditForm) {
+    auditForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = auditForm.querySelector('button[type="submit"]');
+        const original = btn.textContent;
+        btn.textContent = 'Šaljem...';
+        btn.disabled = true;
+
+        const fd = new FormData(auditForm);
+        const payload = {
+            formType: 'audit',
+            website: fd.get('website'),
+            business: fd.get('business'),
+            email: fd.get('email'),
+            goals: fd.get('goals') || '',
+            captcha: fd.get('h-captcha-response') || ''
+        };
+
+        try {
+            const resp = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await resp.json();
+            if (resp.ok && result.success) {
+                auditStatus.textContent = '✅ Hvala! Mini‑audit stiže na email uskoro.';
+                auditStatus.className = 'form-status success';
+                auditStatus.style.display = 'block';
+                auditForm.reset();
+            } else {
+                console.error('Audit API Error:', result);
+                auditStatus.textContent = `❌ ${result.error || 'Greška pri slanju.'}`;
+                auditStatus.className = 'form-status error';
+                auditStatus.style.display = 'block';
+            }
+        } catch (err) {
+            auditStatus.textContent = `❌ Network greška: ${err.message}`;
+            auditStatus.className = 'form-status error';
+            auditStatus.style.display = 'block';
+        }
+
+        btn.textContent = original;
+        btn.disabled = false;
+
+        setTimeout(() => (auditStatus.style.display = 'none'), 7000);
     });
 }
 

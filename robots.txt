@@ -1,0 +1,5 @@
+# Robots.txt for VP Solutions
+User-agent: *
+Allow: /
+
+Sitemap: https://vpsolution.vercel.app/sitemap.xml
