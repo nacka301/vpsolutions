@@ -371,27 +371,7 @@
         </div>
     </section>
 
-    <!-- Mini Audit Section (moved above footer) -->
-    <section id="audit" class="contact" style="padding-top: 40px;">
-        <div class="container contact-grid">
-            <div>
-                <h2>Besplatan mini‑audit</h2>
-                <p>Pošaljite link i email – javim ću 3 konkretne stvari koje mogu donijeti više upita.</p>
-            </div>
-            <form class="contact-form" id="auditForm">
-                <input type="hidden" name="formType" value="audit">
-                <!-- Honeypot i timestamp za anti-spam (umjesto CAPTCHA) -->
-                <input type="text" name="hp" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" />
-                <input type="hidden" name="ts" value="" />
-                <input type="url" name="website" placeholder="URL vaše web stranice (https://...)" required>
-                <input type="text" name="business" placeholder="Naziv brenda/tvrtke (opcionalno)">
-                <input type="email" name="email" placeholder="Vaš email" required>
-                <textarea name="goals" placeholder="Što želite poboljšati (npr. više upita, brža stranica, bolje na mobitelu)" rows="4"></textarea>
-                <button type="submit" class="btn btn-primary">Zatraži mini‑audit</button>
-                <div class="form-status" id="auditStatus"></div>
-            </form>
-        </div>
-    </section>
+    
 
     <!-- Footer -->
     <footer class="footer">
