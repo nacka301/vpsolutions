@@ -1,4 +1,4 @@
-// Vercel Serverless funkcija za slanje emaila preko Brevo (Sendinblue) + hCaptcha verifikacija
+// Vercel Serverless funkcija za slanje emaila preko Brevo (Sendinblue) + lagana anti-spam zaštita (honeypot + timing)
 const SibApiV3Sdk = require('sib-api-v3-sdk');
 
 module.exports = async function handler(req, res) {
@@ -12,7 +12,6 @@ module.exports = async function handler(req, res) {
   const apiKey = defaultClient.authentications['api-key'];
   apiKey.apiKey = process.env.BREVO_API_KEY;
 
-  const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '';
   const {
     formType,
     name,
@@ -22,36 +21,18 @@ module.exports = async function handler(req, res) {
     website,
     business,
     goals,
-    captcha
+    hp,
+    ts
   } = req.body || {};
-
-  // hCaptcha server-side verifikacija (obavezno)
-  try {
-    const secret = process.env.HCAPTCHA_SECRET;
-    if (!captcha) {
-      return res.status(400).json({ error: 'Molimo potvrdite da niste robot (hCaptcha).' });
-    }
-    if (!secret) {
-      return res.status(500).json({ error: 'Captcha konfiguracija nije postavljena. Kontaktirajte administratora.' });
-    }
-
-    const params = new URLSearchParams();
-    params.append('secret', secret);
-    params.append('response', captcha);
-    if (ip) params.append('remoteip', Array.isArray(ip) ? ip[0] : String(ip));
-
-    const verifyResp = await fetch('https://hcaptcha.com/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params
-    });
-    const verifyJson = await verifyResp.json();
-    if (!verifyJson.success) {
-      return res.status(400).json({ error: 'Captcha verifikacija nije uspjela. Pokušajte ponovo.' });
-    }
-  } catch (e) {
-    console.error('hCaptcha verify error:', e);
-    return res.status(500).json({ error: 'Greška pri verifikaciji captcha-e.' });
+  // Anti-spam: honeypot i minimalno vrijeme na formi
+  if (hp && String(hp).trim() !== '') {
+    // Tihi success (ne šaljemo email) kako bismo zavarali botove
+    return res.status(200).json({ success: true, message: 'OK' });
+  }
+  const now = Date.now();
+  const submittedAt = ts ? Number(ts) : 0;
+  if (!submittedAt || isNaN(submittedAt) || (now - submittedAt) < 2000) {
+    return res.status(400).json({ error: 'Molimo pošaljite zahtjev ponovno.' });
   }
 
   // Validacija i sanitizacija inputa

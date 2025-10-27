@@ -100,7 +100,8 @@ if (contactForm) {
             email: formData.get('email'),
             phone: formData.get('phone'),
             message: formData.get('message'),
-            captcha: formData.get('h-captcha-response') || ''
+            hp: contactForm.querySelector('input[name="hp"]')?.value || '',
+            ts: contactForm.querySelector('input[name="ts"]')?.value || ''
         };
         
         try {
@@ -170,7 +171,8 @@ if (auditForm) {
             business: fd.get('business'),
             email: fd.get('email'),
             goals: fd.get('goals') || '',
-            captcha: fd.get('h-captcha-response') || ''
+            hp: auditForm.querySelector('input[name="hp"]')?.value || '',
+            ts: auditForm.querySelector('input[name="ts"]')?.value || ''
         };
 
         try {
@@ -203,6 +205,14 @@ if (auditForm) {
         setTimeout(() => (auditStatus.style.display = 'none'), 7000);
     });
 }
+
+// Postavi timestamp na učitavanje (anti-spam time check)
+document.addEventListener('DOMContentLoaded', () => {
+    const now = Date.now().toString();
+    document.querySelectorAll('form.contact-form input[name="ts"]').forEach(el => {
+        el.value = now;
+    });
+});
 
 // Parallax efekat za hero sekciju
 window.addEventListener('scroll', () => {

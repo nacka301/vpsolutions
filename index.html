@@ -29,8 +29,7 @@
         }
         </script>
     
-        <!-- hCaptcha (test key used for dev; replace with your site key in data-sitekey below if desired) -->
-        <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+        
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -349,14 +348,13 @@
                     </div>
                 </div>
                 <form class="contact-form" id="contactForm">
+                    <!-- Honeypot i timestamp za anti-spam (umjesto CAPTCHA) -->
+                    <input type="text" name="hp" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" />
+                    <input type="hidden" name="ts" value="" />
                     <input type="text" name="name" placeholder="Vaše ime i prezime" required>
                     <input type="email" name="email" placeholder="Email adresa" required>
                     <input type="tel" name="phone" placeholder="Telefon (opcionalno)">
                     <textarea name="message" placeholder="Opišite svoj projekt ili što Vas zanima..." rows="5" required></textarea>
-                    <!-- hCaptcha widget -->
-                    <div class="gdpr-checkbox">
-                        <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
-                    </div>
                     
                     <div class="gdpr-checkbox">
                         <label>
@@ -414,14 +412,13 @@
             </div>
             <form class="contact-form" id="auditForm">
                 <input type="hidden" name="formType" value="audit">
+                <!-- Honeypot i timestamp za anti-spam (umjesto CAPTCHA) -->
+                <input type="text" name="hp" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" />
+                <input type="hidden" name="ts" value="" />
                 <input type="url" name="website" placeholder="URL vaše web stranice (https://...)" required>
                 <input type="text" name="business" placeholder="Naziv brenda/tvrtke (opcionalno)">
                 <input type="email" name="email" placeholder="Vaš email" required>
                 <textarea name="goals" placeholder="Što želite poboljšati (npr. više upita, brža stranica, bolje na mobitelu)" rows="4"></textarea>
-                <!-- hCaptcha widget -->
-                <div class="gdpr-checkbox">
-                    <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
-                </div>
                 <button type="submit" class="btn btn-primary">Zatraži mini‑audit</button>
                 <div class="form-status" id="auditStatus"></div>
             </form>
