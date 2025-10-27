@@ -150,28 +150,6 @@ if (contactForm) {
     });
 }
 
-// WhatsApp floating button - sakrij ga na vrhu stranice
-const whatsappFloat = document.querySelector('.whatsapp-float');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        whatsappFloat.style.opacity = '1';
-        whatsappFloat.style.visibility = 'visible';
-    } else {
-        whatsappFloat.style.opacity = '0';
-        whatsappFloat.style.visibility = 'hidden';
-    }
-});
-
-// Postavi početno stanje
-if (whatsappFloat) {
-    whatsappFloat.style.transition = 'all 0.3s ease';
-    if (window.scrollY <= 300) {
-        whatsappFloat.style.opacity = '0';
-        whatsappFloat.style.visibility = 'hidden';
-    }
-}
-
 // Parallax efekat za hero sekciju
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;

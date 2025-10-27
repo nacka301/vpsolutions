@@ -536,17 +536,17 @@ section {
 /* Floating Social Buttons */
 .floating-social {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
     z-index: 999;
 }
 
 .social-float {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -577,7 +577,7 @@ section {
 }
 
 .social-float svg {
-    width: 32px;
+    width: 26px;
     height: 32px;
     fill: var(--white);
 }
