@@ -533,32 +533,52 @@ section {
 }
 
 /* Floating WhatsApp Button */
-.whatsapp-float {
+/* Floating Social Buttons */
+.floating-social {
     position: fixed;
     bottom: 30px;
-    left: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 999;
+}
+
+.social-float {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-    color: var(--white);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-    z-index: 999;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     animation: pulse 2s infinite;
 }
 
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+.instagram-float {
+    background: linear-gradient(135deg, #833AB4 0%, #E1306C 50%, #FCAF45 100%);
+    color: var(--white);
 }
 
-.whatsapp-float .whatsapp-icon {
-    width: 35px;
-    height: 35px;
+.facebook-float {
+    background: linear-gradient(135deg, #1877F2 0%, #0C5EB5 100%);
+    color: var(--white);
+}
+
+.whatsapp-float {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: var(--white);
+}
+
+.social-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+}
+
+.social-float svg {
+    width: 32px;
+    height: 32px;
     fill: var(--white);
 }
 
