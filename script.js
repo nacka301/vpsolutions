@@ -57,7 +57,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Dodaj animacije na sve kartice i elemente
-document.querySelectorAll('.service-card, .portfolio-item, .stat-item').forEach(el => {
+document.querySelectorAll('.service-card, .portfolio-card, .stat-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'all 0.6s ease-out';
@@ -244,22 +244,6 @@ document.querySelectorAll('.approach-item').forEach(item => {
 });
 
 // Dodaj hover efekt na portfolio items
-document.querySelectorAll('.portfolio-item').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-        const placeholder = this.querySelector('.portfolio-placeholder');
-        if (placeholder) {
-            placeholder.style.transform = 'scale(1.1)';
-        }
-    });
-    
-    item.addEventListener('mouseleave', function() {
-        const placeholder = this.querySelector('.portfolio-placeholder');
-        if (placeholder) {
-            placeholder.style.transform = 'scale(1)';
-        }
-    });
-});
-
 // Dark mode toggle (opcionalno - možeš dodati gumb za prebacivanje)
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
@@ -270,51 +254,5 @@ function toggleDarkMode() {
 if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
 }
-
-// Portfolio modal funkcionalnost
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-const modals = document.querySelectorAll('.portfolio-modal');
-const modalCloses = document.querySelectorAll('.modal-close');
-
-// Otvori modal kad klikneš na portfolio item
-portfolioItems.forEach(item => {
-    item.addEventListener('click', () => {
-        const modalId = item.getAttribute('data-modal');
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Blokiraj scroll
-        }
-    });
-});
-
-// Zatvori modal kad klikneš na X
-modalCloses.forEach(close => {
-    close.addEventListener('click', () => {
-        const modal = close.closest('.portfolio-modal');
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Vrati scroll
-    });
-});
-
-// Zatvori modal kad klikneš izvan njega
-modals.forEach(modal => {
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-});
-
-// Zatvori modal s ESC tipkom
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        modals.forEach(modal => {
-            modal.classList.remove('active');
-        });
-        document.body.style.overflow = 'auto';
-    }
-});
 
 console.log('🚀 Stranica učitana - Made with ❤️ by David');

@@ -3,29 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VP Solutions - Web Stranice, Aplikacije & Marketing | David</title>
-    <meta name="description" content="Profesionalna izrada web stranica, poslovnih aplikacija i digitalni marketing za obrte i tvrtke. Moderna rješenja koja donose rezultate.">
-    <meta name="keywords" content="web stranice, aplikacije, marketing, obrti, Croatia, izrada web stranica">
+        <title>VP Solutions | Profesionalne IT Usluge & Izrada Web Aplikacija</title>
+        <meta name="description" content="Trebate modernu web stranicu ili softver po mjeri? VP Solutions nudi razvoj aplikacija, web shopova i digitalnu transformaciju za poduzetnike u Hrvatskoj, Srbiji i Bosni i Hercegovini.">
+        <meta name="keywords" content="izrada web stranica, IT usluge, razvoj softvera, web aplikacije, programiranje, VP Solutions, digitalna agencija, custom software, automatizacija poslovanja, web shop razvoj, IT usluge Hrvatska, izrada web stranica Srbija, web developer Bosna, programer Balkan">
     <meta name="author" content="David - VP Solutions">
     <meta name="theme-color" content="#667eea">
+    
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0YGB2DQ6Q"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-Z0YGB2DQ6Q');
+        </script>
     
         <!-- Vercel Web Analytics (privacy-friendly) -->
         <script defer src="/_vercel/insights/script.js"></script>
     
-        <!-- JSON-LD Schema (Person/Brand) -->
+        <!-- JSON-LD Schema (ProfessionalService) -->
         <script type="application/ld+json">
         {
             "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "David",
-            "alternateName": "VP Solutions",
+            "@type": "ProfessionalService",
+            "name": "VP Solutions",
+            "description": "Profesionalne IT usluge, izrada web stranica, razvoj aplikacija i digitalna transformacija za mala i srednja poduzeća u Hrvatskoj, Srbiji i Bosni i Hercegovini",
             "url": "https://vpsolution.vercel.app/",
-            "sameAs": [
-                "https://www.instagram.com/_vpsolutions_/",
-                "https://www.facebook.com/profile.php?id=61583080793879"
-            ],
-            "email": "mailto:vpsolutions.booking@gmail.com",
-            "telephone": "+385998535380"
+            "priceRange": "$$",
+            "telephone": "+385998535380",
+            "email": "vpsolutions.booking@gmail.com",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "HR"
+            },
+            "areaServed": [
+                {
+                    "@type": "Country",
+                    "name": "Hrvatska"
+                },
+                {
+                    "@type": "Country",
+                    "name": "Srbija"
+                },
+                {
+                    "@type": "Country",
+                    "name": "Bosna i Hercegovina"
+                }
+            ]
         }
         </script>
     
@@ -33,8 +58,8 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="VP Solutions - Web Developer">
-    <meta property="og:description" content="Izrada modernih web stranica, aplikacija i digitalni marketing">
+    <meta property="og:title" content="VP Solutions | IT partner za regiju">
+    <meta property="og:description" content="Izrada web stranica, aplikacija i digitalna transformacija za poduzetnike u Hrvatskoj, Srbiji i Bosni i Hercegovini.">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
@@ -67,8 +92,8 @@
     <!-- Hero sekcija -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Moderan web developer koji stvara <span class="gradient-text">digitalna rješenja što donose rezultate</span></h1>
-            <p class="hero-subtitle">Web stranice, aplikacije i AI integracije za vaš biznis</p>
+            <h1 class="hero-title">Digitalni partner za Hrvatsku, Srbiju i Bosnu i Hercegovinu</h1>
+            <p class="hero-subtitle">Razvijamo web stranice, aplikacije i automatizacije koje prodaju, štede vrijeme i dižu vaše poslovanje na višu razinu.</p>
             <div class="hero-buttons">
                 <a href="#services" class="btn btn-primary">Pogledajte usluge</a>
                 <a href="#contact" class="btn btn-secondary">Zatražite ponudu</a>
@@ -156,128 +181,68 @@
     </section>
 
     <!-- Portfolio -->
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio-section">
         <div class="container">
-            <div class="section-header">
-                <h2>Portfolio projekata</h2>
-                <p>Primjeri realiziranih projekata i rješenja</p>
+            <div class="portfolio-copy">
+                <h2>Naši radovi</h2>
+                <p class="portfolio-subtitle">Digitalna rješenja koja pokreću poslovanje u Hrvatskoj, Srbiji i Bosni i Hercegovini.</p>
             </div>
+
             <div class="portfolio-grid">
-                <div class="portfolio-item" data-modal="modal1">
-                    <div class="portfolio-image">
-                        <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
-                            <div class="portfolio-icon">&#127860;</div>
-                            <p>Restoran</p>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h3>Restoran</h3>
-                            <p>Web stranica s online narudžbama<br>i rezervacijama stolova</p>
-                            <div class="portfolio-link">→</div>
-                        </div>
+                <article class="portfolio-card">
+                    <div class="card-image" style="background-image: linear-gradient(135deg, #4f46e5, #7c3aed);">
+                        <span class="card-icon">🍽️</span>
                     </div>
-                </div>
-                <div class="portfolio-item" data-modal="modal2">
-                    <div class="portfolio-image">
-                        <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
-                            <div class="portfolio-icon">&#9986;</div>
-                            <p>Salon</p>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h3>Frizerski salon</h3>
-                            <p>Aplikacija za rezervaciju termina<br>i upravljanje klijentima</p>
-                            <div class="portfolio-link">→</div>
-                        </div>
+                    <div class="card-content">
+                        <span class="tag">Web App</span>
+                        <h3>Restoran & Dostava</h3>
+                        <p>Sustav za online naručivanje hrane, rezervacije stolova i praćenje dostave u realnom vremenu.</p>
+                        <div class="card-meta">React · Node.js · Stripe</div>
+                        <a href="#contact" class="btn-arrow">Pogledaj projekt ➝</a>
                     </div>
-                </div>
-                <div class="portfolio-item" data-modal="modal3">
-                    <div class="portfolio-image">
-                        <div class="portfolio-placeholder" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
-                            <div class="portfolio-icon">&#128295;</div>
-                            <p>Obrt</p>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h3>Građevinski obrt</h3>
-                            <p>Web stranica i kompletna<br>digitalna marketing kampanja</p>
-                            <div class="portfolio-link">→</div>
-                        </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <div class="card-image" style="background-image: linear-gradient(135deg, #a855f7, #ec4899);">
+                        <span class="card-icon">✂️</span>
                     </div>
-                </div>
+                    <div class="card-content">
+                        <span class="tag">CRM Sustav</span>
+                        <h3>Booking za Salone</h3>
+                        <p>Automatizirani kalendar, CRM i podsjetnici za frizerske i beauty salone u regiji.</p>
+                        <div class="card-meta">Next.js · Twilio · MongoDB</div>
+                        <a href="#contact" class="btn-arrow">Pogledaj projekt ➝</a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <div class="card-image" style="background-image: url('images/gradjevinski-obrt.png');">
+                        <span class="card-icon">🏗️</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">Digitalni nastup</span>
+                        <h3>Građevinski obrt</h3>
+                        <p>Kompletna web stranica i marketing kampanja koja je donijela 200% više upita.</p>
+                        <div class="card-meta">WordPress · Meta Ads · SEO</div>
+                        <a href="https://fialamont.com" target="_blank" rel="noopener" class="btn-arrow">Pogledaj stranicu ➝</a>
+                    </div>
+                </article>
+
+                <article class="portfolio-card">
+                    <div class="card-image" style="background-image: linear-gradient(135deg, #0ea5e9, #14b8a6);">
+                        <span class="card-icon">🛍️</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">E-commerce</span>
+                        <h3>Thompson Web Shop</h3>
+                        <p>Web trgovina s naprednom košaricom, admin panelom i integracijama plaćanja.</p>
+                        <div class="card-meta">Node.js · MongoDB · Vercel</div>
+                        <a href="#contact" class="btn-arrow">Pogledaj projekt ➝</a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
-
-    <!-- Portfolio Modali -->
-    <div id="modal1" class="portfolio-modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div class="modal-header" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
-                <div class="modal-icon">&#127860;</div>
-                <h2>Restoran</h2>
-            </div>
-            <div class="modal-body">
-                <h3>Web stranica s online narudžbama</h3>
-                <p>Moderna web stranica za restoran s integriranim sustavom za online narudžbe i rezervacije stolova. Projekt je povećao broj rezervacija za 150% u prva 3 mjeseca.</p>
-                <div class="modal-features">
-                    <h4>Što je uključeno:</h4>
-                    <ul>
-                        <li>&#10003; Online naručivanje hrane s košaricom</li>
-                        <li>&#10003; Sustav rezervacija stolova</li>
-                        <li>&#10003; Digitalni jelovnik s fotografijama</li>
-                        <li>&#10003; Integracija s dostavljačima</li>
-                        <li>&#10003; Mobitel-optimizirani dizajn</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal2" class="portfolio-modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div class="modal-header" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
-                <div class="modal-icon">&#9986;</div>
-                <h2>Frizerski salon</h2>
-            </div>
-            <div class="modal-body">
-                <h3>Aplikacija za rezervaciju termina</h3>
-                <p>Prilagođena aplikacija za upravljanje terminima i klijentima frizerskog salona. Smanjila administrativni rad za 70% i eliminirala duple rezervacije.</p>
-                <div class="modal-features">
-                    <h4>Što je uključeno:</h4>
-                    <ul>
-                        <li>&#10003; Online booking 24/7</li>
-                        <li>&#10003; Automatski podsjetnici (SMS/Email)</li>
-                        <li>&#10003; Baza podataka klijenata</li>
-                        <li>&#10003; Povijest tretmana i preferencije</li>
-                        <li>&#10003; Kalendar zaposlenika</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal3" class="portfolio-modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div class="modal-header" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
-                <div class="modal-icon">&#128295;</div>
-                <h2>Građevinski obrt</h2>
-            </div>
-            <div class="modal-body">
-                <h3>Kompletna digitalna marketing kampanja</h3>
-                <p>Profesionalna web stranica i marketing strategija za građevinski obrt. Rezultat: 200% povećanje upita i 45% više poslova u 6 mjeseci.</p>
-                <div class="modal-features">
-                    <h4>Što je uključeno:</h4>
-                    <ul>
-                        <li>&#10003; Profesionalna web stranica</li>
-                        <li>&#10003; SEO optimizacija (1. stranica Google)</li>
-                        <li>&#10003; Google Ads kampanja</li>
-                        <li>&#10003; Facebook i Instagram oglasi</li>
-                        <li>&#10003; Portfolio radova i galerija</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     
 
@@ -338,21 +303,29 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>Zašto VP Solutions?</h2>
-                    <p>VP Solutions se specijalizira za pomoć malim i srednjim biznisima da postanu vidljivi online i privuku više klijenata. Ne radimo samo web stranice - kreiramo digitalna rješenja koja donose stvarne rezultate vašem poslovanju.</p>
+                    <h2>Više od koda – gradimo rješenja koja rade za vas</h2>
+                    <p>Dobrodošli u <strong>VP Solutions</strong>. Nismo samo IT agencija; vaš smo partner za digitalnu transformaciju i rast. Razumijemo da vam ne treba još jedna "web stranica" već alat koji prodaje, automatizira i štedi vrijeme.</p>
+                    <p style="margin-top: 15px;">Radimo s poduzetnicima u <strong>Hrvatskoj, Srbiji i Bosni i Hercegovini</strong> i isporučujemo brza, sigurna i skalabilna rješenja temeljena na modernom tech stacku (Node.js, React, MongoDB, Cloud).</p>
                     <div class="approach">
                         <div class="approach-item">
-                            <h4>&#10004; Razumijemo Vaš biznis</h4>
-                            <p>Svaki projekt počinje s razgovorom o vašim ciljevima. Kreiramo rješenja koja odgovaraju baš vašim potrebama, ne gotove šablone.</p>
+                            <h4>&#10004; Custom web i aplikacije</h4>
+                            <p>Svaki projekt gradimo od nule prema vašim procesima. Bez šablona koje vas ograničavaju.</p>
                         </div>
                         <div class="approach-item">
-                            <h4>&#10004; Brza realizacija</h4>
-                            <p>Većina projekata je gotova za 2-4 tjedna. Radimo učinkovito bez kompromisa na kvaliteti.</p>
+                            <h4>&#10004; IT strategija i konzultacije</h4>
+                            <p>Pomažemo vam odabrati pravo rješenje, automatizirati poslovanje i integrirati postojeće sustave.</p>
                         </div>
                         <div class="approach-item">
-                            <h4>&#10004; Podrška i nakon projekta</h4>
-                            <p>Ne ostavljam vas same. Pružam obuku, podršku i savjete kako maksimalno iskoristiti vaše digitalno rješenje.</p>
+                            <h4>&#10004; Fokus na rezultate</h4>
+                            <p>Projekt smatramo uspješnim tek kad vidite mjerljive rezultate: više upita, prodaje ili ušteđenih sati.</p>
                         </div>
+                        <div class="approach-item">
+                            <h4>&#10004; Podrška nakon lansiranja</h4>
+                            <p>U igri smo i nakon isporuke: edukacija, podrška i iteracije kako biste maksimalno iskoristili rješenje.</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px; text-align: center;">
+                        <a href="#contact" class="btn btn-primary">Zatražite ponudu</a>
                     </div>
                 </div>
                 <div class="about-image">
@@ -434,7 +407,7 @@
             <p>&copy; 2025 VP Solutions - Web Developer. Sva prava pridržana.</p>
             <p>
                 <a href="privacy.html" style="color: #667eea; text-decoration: none; margin-right: 20px;">Politika Privatnosti</a>
-                Profesionalna izrada web stranica, aplikacija i digitalni marketing
+                Profesionalna izrada web stranica, razvoj aplikacija i IT usluge | Hrvatska · Srbija · Bosna i Hercegovina
             </p>
         </div>
     </footer>
