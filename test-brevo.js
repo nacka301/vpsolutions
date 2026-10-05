@@ -2,7 +2,7 @@
 const SibApiV3Sdk = require('sib-api-v3-sdk');
 
 // Brevo API ključ
-const BREVO_API_KEY = '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';
+const BREVO_API_KEY = process.env.BREVO_API_KEY;
 
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
 const apiKey = defaultClient.authentications['api-key'];

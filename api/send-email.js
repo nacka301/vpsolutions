@@ -180,10 +180,7 @@ ${message}
     
     return res.status(500).json({ 
       success: false, 
-      error: 'Greška pri slanju emaila',
-      details: error.message,
-      brevoError: error.response ? error.response.text : 'Nema dodatnih informacija',
-      apiKey: process.env.BREVO_API_KEY ? 'API key postoji' : 'API key NEDOSTAJE!'
+      error: 'Greška pri slanju emaila'
     });
   }
 }

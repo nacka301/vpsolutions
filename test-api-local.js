@@ -25,7 +25,7 @@ const res = {
 };
 
 // Mock environment
-process.env.BREVO_API_KEY = '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';
+// Postavi BREVO_API_KEY u okruženju prije pokretanja (npr. BREVO_API_KEY=... node test-api-local.js)
 
 console.log('🧪 Testiram API funkciju lokalno...\n');
 
