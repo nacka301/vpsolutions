@@ -3,81 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politika Privatnosti - VP Solutions</title>
+    <title>Politika privatnosti - VP Solutions</title>
     <meta name="description" content="Politika privatnosti VP Solutions - saznajte kako prikupljamo, koristimo i štitimo vaše osobne podatke u skladu s GDPR-om.">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://vpsolution.vercel.app/privacy.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    <meta name="theme-color" content="#0A0A0B">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A0A0B'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='54' font-weight='700' fill='%237C5CFF' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .privacy-container {
-            max-width: 900px;
-            margin: 100px auto 50px;
-            padding: 40px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        .doc-header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10,10,11,.72);
+            -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
         }
-        .privacy-container h1 {
-            color: var(--gradient-start);
-            margin-bottom: 10px;
-        }
-        .privacy-container h2 {
-            color: var(--gradient-start);
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-        .privacy-container h3 {
-            color: var(--dark);
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        .privacy-container p, .privacy-container li {
-            line-height: 1.8;
-            color: var(--text);
-            margin-bottom: 15px;
-        }
-        .privacy-container ul {
-            margin-left: 20px;
-        }
-        .last-updated {
-            color: var(--text);
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            color: var(--gradient-start);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
+        .doc-header .container { display: flex; align-items: center; height: 68px; }
+        .doc-header .back-top { margin-left: auto; color: var(--muted); font-weight: 500; font-size: .95rem; }
+        .doc-header .back-top:hover { color: var(--text); }
+        .privacy-container { max-width: 820px; margin: 0 auto; padding: 56px 20px 80px; }
+        .privacy-container h1 { font-size: clamp(2rem, 5vw, 2.6rem); }
+        .privacy-container h2 { color: var(--text); margin-top: 40px; margin-bottom: 12px; font-size: 1.35rem; }
+        .privacy-container p, .privacy-container li { line-height: 1.75; color: var(--muted); margin-bottom: 12px; }
+        .privacy-container strong { color: var(--text); }
+        .privacy-container ul { margin: 0 0 12px 20px; list-style: disc; }
+        .privacy-container a { color: var(--accent-ink); text-decoration: underline; }
+        .last-updated { color: var(--muted); font-style: italic; margin: 10px 0 30px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 36px; color: var(--accent-ink); font-weight: 600; }
     </style>
 </head>
 <body>
-    <!-- Navigacija -->
-    <nav class="navbar">
+    <header class="doc-header">
         <div class="container">
-            <div class="logo">
-                <p class="logo-text"><span class="logo-icon">&#60;/&#62;</span> David</p>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html#home">Početna</a></li>
-                <li><a href="index.html#services">Usluge</a></li>
-                <li><a href="index.html#portfolio">Portfolio</a></li>
-                <li><a href="index.html#about">O meni</a></li>
-                <li><a href="index.html#contact">Kontakt</a></li>
-            </ul>
+            <a href="index.html" class="logo"><span class="logo-mark">V</span><span class="logo-text">vpsolutions</span></a>
+            <a href="index.html" class="back-top">← Početna</a>
         </div>
-    </nav>
+    </header>
 
     <main class="privacy-container">
-        <h1>Politika Privatnosti</h1>
+        <h1>Politika privatnosti</h1>
         <p class="last-updated">Zadnje ažurirano: 26. listopada 2025.</p>
 
         <h2>1. Uvod</h2>
@@ -88,7 +54,7 @@
         <ul>
             <li><strong>Ime i prezime</strong> - kako bismo vas mogli osloviti</li>
             <li><strong>Email adresa</strong> - kako bismo vam mogli odgovoriti</li>
-            <li><strong>Telefonski broj</strong> (opcionalno) - za brži kontakt</li>
+            <li><strong>Vrsta projekta</strong> (opcionalno) - za lakše razumijevanje upita</li>
             <li><strong>Vaša poruka</strong> - sadržaj vašeg upita</li>
         </ul>
 
@@ -104,7 +70,7 @@
         <h2>4. Pravna osnova za obradu podataka (GDPR)</h2>
         <p>Obrađujemo vaše podatke na temelju:</p>
         <ul>
-            <li><strong>Vaše pristanka</strong> - kada popunite kontakt formu, pristajete na obradu podataka</li>
+            <li><strong>Vašeg pristanka</strong> - kada popunite kontakt formu, pristajete na obradu podataka</li>
             <li><strong>Legitimnog interesa</strong> - za odgovaranje na vaše upite i pružanje usluga</li>
         </ul>
 
@@ -112,20 +78,20 @@
         <p>Vaši podatci se šalju putem sigurne HTTPS veze i pohranjuju se:</p>
         <ul>
             <li>U našem email sandučiću (Gmail) sa standardnom Google sigurnošću</li>
-            <li>Podaci su zaštićeni enkripcijom tokom prijenosa</li>
+            <li>Podaci su zaštićeni enkripcijom tijekom prijenosa</li>
             <li>Pristup podacima ima samo ovlaštena osoba (vlasnik VP Solutions)</li>
         </ul>
 
         <h2>6. Koliko dugo čuvamo podatke</h2>
         <p>Vaše podatke čuvamo:</p>
         <ul>
-            <li><strong>Aktivni upiti:</strong> Dok traje komunikacija i do 1 godine nakon zadnje interakcije</li>
-            <li><strong>Realizirani projekti:</strong> Do 3 godine nakon završetka projekta (za računovodstvene svrhe)</li>
+            <li><strong>Aktivni upiti:</strong> dok traje komunikacija i do 1 godine nakon zadnje interakcije</li>
+            <li><strong>Realizirani projekti:</strong> do 3 godine nakon završetka projekta (za računovodstvene svrhe)</li>
             <li>Možete zatražiti brisanje svojih podataka u bilo kojem trenutku</li>
         </ul>
 
         <h2>7. Vaša prava (GDPR)</h2>
-        <p>U skladu sa GDPR-om, imate pravo na:</p>
+        <p>U skladu s GDPR-om, imate pravo na:</p>
         <ul>
             <li><strong>Pristup</strong> - možete zatražiti kopiju podataka koje imamo o vama</li>
             <li><strong>Ispravak</strong> - možete ispraviti netočne podatke</li>
@@ -136,8 +102,8 @@
         </ul>
         <p>Za ostvarivanje svojih prava kontaktirajte nas na: <a href="mailto:vpsolutions.booking@gmail.com">vpsolutions.booking@gmail.com</a></p>
 
-        <h2>8. Kolačići (Cookies)</h2>
-        <p>Trenutno <strong>ne koristimo kolačiće</strong> niti alate za praćenje korisnika (Google Analytics ili slično). Vaša privatnost je maksimalno zaštićena.</p>
+        <h2>8. Kolačići i analitika</h2>
+        <p>Za mjerenje posjećenosti koristimo Google Analytics i Vercel Web Analytics. Ti alati prikupljaju anonimizirane podatke o korištenju stranice (npr. posjećene stranice, uređaj, približna lokacija) radi poboljšanja sadržaja. Ne koristimo ih za identifikaciju pojedinca.</p>
 
         <h2>9. Linkovi prema trećim stranama</h2>
         <p>Naša stranica može sadržavati linkove prema:</p>
@@ -151,13 +117,12 @@
         <p>Naše usluge nisu namijenjene osobama mlađim od 16 godina. Ne prikupljamo svjesno podatke od djece.</p>
 
         <h2>11. Promjene politike privatnosti</h2>
-        <p>Zadržavamo pravo ažuriranja ove politike. Sve promjene će biti objavljene na ovoj stranici sa datumom izmjene.</p>
+        <p>Zadržavamo pravo ažuriranja ove politike. Sve promjene bit će objavljene na ovoj stranici s datumom izmjene.</p>
 
         <h2>12. Kontakt za pitanja o privatnosti</h2>
         <p>Ako imate bilo kakvih pitanja o ovoj politici privatnosti ili kako postupamo s vašim podacima, kontaktirajte nas:</p>
         <ul>
             <li><strong>Email:</strong> <a href="mailto:vpsolutions.booking@gmail.com">vpsolutions.booking@gmail.com</a></li>
-            <li><strong>WhatsApp:</strong> <a href="https://wa.me/385998535380">+385 99 853 5380</a></li>
         </ul>
 
         <h2>13. Nadzorno tijelo</h2>
@@ -170,10 +135,10 @@
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 VP Solutions - Web Developer. Sva prava pridržana.</p>
-            <p><a href="privacy.html" style="color: #667eea; text-decoration: none;">Politika Privatnosti</a></p>
+        <div class="container footer-bottom" style="margin-top:0;border-top:none;">
+            <p>&copy; <span id="year">2025</span> VP Solutions</p>
         </div>
     </footer>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

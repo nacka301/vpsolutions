@@ -1,258 +1,166 @@
-// Hamburger menu
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
+// VP Solutions — interakcije (jednostavno, bez frameworka)
 
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
+// ---------- Mobilni izbornik (full screen) ----------
+const navToggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
 
-// Zatvori menu kada klikneš na link
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-    });
-});
+function setMenu(open) {
+  if (!mobileMenu || !navToggle) return;
+  mobileMenu.classList.toggle('open', open);
+  mobileMenu.setAttribute('aria-hidden', String(!open));
+  navToggle.setAttribute('aria-expanded', String(open));
+  navToggle.innerHTML = open
+    ? '<svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>'
+    : '<svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>';
+  document.body.style.overflow = open ? 'hidden' : '';
+}
 
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+if (navToggle) {
+  navToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+}
+if (mobileMenu) {
+  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+// ---------- Navbar blur pri scrollu + sticky CTA ----------
+const navbar = document.getElementById('navbar');
+const stickyCta = document.getElementById('stickyCta');
+const hero = document.getElementById('home');
+const contactSection = document.getElementById('kontakt');
+
+function onScroll() {
+  const y = window.scrollY;
+  if (navbar) navbar.classList.toggle('scrolled', y > 24);
+
+  // Sticky CTA: pojavi se nakon hero, a sakrij se kad dođemo do kontakta
+  if (stickyCta && hero) {
+    let show = y > hero.offsetHeight - 120;
+    if (contactSection && contactSection.getBoundingClientRect().top < window.innerHeight) {
+      show = false;
     }
-});
+    stickyCta.classList.toggle('show', show);
+    stickyCta.setAttribute('aria-hidden', String(!show));
+  }
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-// Animacija pri scrollanju
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
+// ---------- Fade-up reveal (poštuje prefers-reduced-motion) ----------
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealEls = document.querySelectorAll('.reveal');
 
-const observer = new IntersectionObserver((entries) => {
+if (prefersReduced || !('IntersectionObserver' in window)) {
+  revealEls.forEach(el => el.classList.add('is-visible'));
+} else {
+  const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
     });
-}, observerOptions);
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+}
 
-// Dodaj animacije na sve kartice i elemente
-document.querySelectorAll('.service-card, .portfolio-card, .stat-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'all 0.6s ease-out';
-    observer.observe(el);
-});
+// ---------- Chips: vrsta projekta ----------
+const chipGroup = document.getElementById('projectChips');
+const projectTypeInput = document.getElementById('projectType');
+if (chipGroup && projectTypeInput) {
+  chipGroup.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const wasActive = chip.classList.contains('active');
+      chipGroup.querySelectorAll('.chip').forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      if (!wasActive) {
+        chip.classList.add('active');
+        chip.setAttribute('aria-pressed', 'true');
+        projectTypeInput.value = chip.dataset.value || '';
+      } else {
+        projectTypeInput.value = '';
+      }
+    });
+  });
+}
 
-// Kontakt forma sa rate limiting i GDPR
+// ---------- Kontakt forma (zadržan API ugovor: /api/send-email) ----------
 const contactForm = document.querySelector('.contact-form');
-const formStatus = document.querySelector('.form-status');
+const formStatus = contactForm ? contactForm.querySelector('.form-status') : null;
 
-// Rate limiting - sprečava spam
 let lastSubmitTime = 0;
-const SUBMIT_COOLDOWN = 60000; // 1 minuta između submita
+const SUBMIT_COOLDOWN = 60000; // 1 min između slanja
 
 if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Provjera rate limiting
-        const now = Date.now();
-        if (now - lastSubmitTime < SUBMIT_COOLDOWN) {
-            const remainingSeconds = Math.ceil((SUBMIT_COOLDOWN - (now - lastSubmitTime)) / 1000);
-            formStatus.textContent = `⏱️ Molimo pričekajte ${remainingSeconds} sekundi prije ponovnog slanja.`;
-            formStatus.className = 'form-status error';
-            formStatus.style.display = 'block';
-            return;
-        }
-        
-        const button = contactForm.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-        
-        // Prikaži loading state
-        button.textContent = 'Šaljem...';
-        button.disabled = true;
-        
-        // Prikupi podatke iz forme
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            phone: formData.get('phone'),
-            message: formData.get('message'),
-            hp: contactForm.querySelector('input[name="hp"]')?.value || '',
-            ts: contactForm.querySelector('input[name="ts"]')?.value || ''
-        };
-        
-        try {
-            const response = await fetch('/api/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-            
-            const result = await response.json();
-            
-            if (response.ok && result.success) {
-                // Uspješno poslano
-                lastSubmitTime = now; // Postavi vrijeme zadnjeg submita
-                formStatus.textContent = '✅ Hvala! Vaš upit je poslan. Odgovorit ću Vam na email u najkraćem roku.';
-                formStatus.className = 'form-status success';
-                formStatus.style.display = 'block';
-                contactForm.reset();
-            } else {
-                // Greška - prikaži detaljne informacije
-                console.error('API Error Response:', result);
-                let errorMsg = result.error || 'Došlo je do greške';
-                if (result.details) errorMsg += ` (${result.details})`;
-                if (result.brevoError) errorMsg += `\n\nBrevo: ${result.brevoError}`;
-                if (result.apiKey) errorMsg += `\n${result.apiKey}`;
-                
-                formStatus.textContent = `❌ ${errorMsg}`;
-                formStatus.className = 'form-status error';
-                formStatus.style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Network/Parse Error:', error);
-            formStatus.textContent = `❌ Network greška: ${error.message}. Kontaktirajte me na WhatsApp.`;
-            formStatus.className = 'form-status error';
-            formStatus.style.display = 'block';
-        }
-        
-        // Vrati button u normalno stanje
-        button.textContent = originalText;
-        button.disabled = false;
-        
-        // Sakrij poruku nakon 7 sekundi
-        setTimeout(() => {
-            formStatus.style.display = 'none';
-        }, 7000);
-    });
-}
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-// Mini‑audit forma
-const auditForm = document.querySelector('#auditForm');
-const auditStatus = document.querySelector('#auditStatus');
-
-if (auditForm) {
-    auditForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = auditForm.querySelector('button[type="submit"]');
-        const original = btn.textContent;
-        btn.textContent = 'Šaljem...';
-        btn.disabled = true;
-
-        const fd = new FormData(auditForm);
-        const payload = {
-            formType: 'audit',
-            website: fd.get('website'),
-            business: fd.get('business'),
-            email: fd.get('email'),
-            goals: fd.get('goals') || '',
-            hp: auditForm.querySelector('input[name="hp"]')?.value || '',
-            ts: auditForm.querySelector('input[name="ts"]')?.value || ''
-        };
-
-        try {
-            const resp = await fetch('/api/send-email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            const result = await resp.json();
-            if (resp.ok && result.success) {
-                auditStatus.textContent = '✅ Hvala! Mini‑audit stiže na email uskoro.';
-                auditStatus.className = 'form-status success';
-                auditStatus.style.display = 'block';
-                auditForm.reset();
-            } else {
-                console.error('Audit API Error:', result);
-                auditStatus.textContent = `❌ ${result.error || 'Greška pri slanju.'}`;
-                auditStatus.className = 'form-status error';
-                auditStatus.style.display = 'block';
-            }
-        } catch (err) {
-            auditStatus.textContent = `❌ Network greška: ${err.message}`;
-            auditStatus.className = 'form-status error';
-            auditStatus.style.display = 'block';
-        }
-
-        btn.textContent = original;
-        btn.disabled = false;
-
-        setTimeout(() => (auditStatus.style.display = 'none'), 7000);
-    });
-}
-
-// Postavi timestamp na učitavanje (anti-spam time check)
-document.addEventListener('DOMContentLoaded', () => {
-    const now = Date.now().toString();
-    document.querySelectorAll('form.contact-form input[name="ts"]').forEach(el => {
-        el.value = now;
-    });
-});
-
-// Parallax efekat za hero sekciju
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroAnimation = document.querySelector('.hero-animation');
-    
-    if (heroAnimation) {
-        heroAnimation.style.transform = `translateY(${scrolled * 0.3}px)`;
+    const now = Date.now();
+    if (now - lastSubmitTime < SUBMIT_COOLDOWN) {
+      const remaining = Math.ceil((SUBMIT_COOLDOWN - (now - lastSubmitTime)) / 1000);
+      showStatus(`Molimo pričekajte ${remaining} s prije ponovnog slanja.`, 'error');
+      return;
     }
-});
 
-// Dodatne animacije za pristup sekciju
-const approachObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateX(0)';
-            }, index * 100);
-        }
-    });
-}, { threshold: 0.1 });
+    const button = contactForm.querySelector('button[type="submit"]');
+    const originalText = button.textContent;
+    button.textContent = 'Šaljem...';
+    button.disabled = true;
 
-document.querySelectorAll('.approach-item').forEach(item => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateX(-30px)';
-    item.style.transition = 'all 0.6s ease-out';
-    approachObserver.observe(item);
-});
+    const fd = new FormData(contactForm);
+    const projectType = (fd.get('projectType') || '').toString().trim();
+    let message = (fd.get('message') || '').toString();
+    if (projectType) message = `Vrsta projekta: ${projectType}\n\n${message}`;
 
-// Dodaj hover efekt na portfolio items
-// Dark mode toggle (opcionalno - možeš dodati gumb za prebacivanje)
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    const data = {
+      name: fd.get('name'),
+      email: fd.get('email'),
+      message: message,
+      hp: contactForm.querySelector('input[name="hp"]')?.value || '',
+      ts: contactForm.querySelector('input[name="ts"]')?.value || ''
+    };
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        lastSubmitTime = now;
+        showStatus('Hvala! Vaš upit je poslan. Javljamo se na email u najkraćem roku.', 'success');
+        contactForm.reset();
+        contactForm.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        if (projectTypeInput) projectTypeInput.value = '';
+      } else {
+        showStatus(result.error || 'Došlo je do greške. Pokušajte ponovno.', 'error');
+      }
+    } catch (error) {
+      showStatus(`Greška u mreži: ${error.message}. Pišite nam na email.`, 'error');
+    }
+
+    button.textContent = originalText;
+    button.disabled = false;
+  });
 }
 
-// Učitaj dark mode preference iz localStorage
-if (localStorage.getItem('darkMode') === 'true') {
-    document.body.classList.add('dark-mode');
+function showStatus(text, type) {
+  if (!formStatus) return;
+  formStatus.textContent = text;
+  formStatus.className = `form-status ${type}`;
+  clearTimeout(showStatus._t);
+  showStatus._t = setTimeout(() => { formStatus.className = 'form-status'; }, 8000);
 }
 
-console.log('🚀 Stranica učitana - Made with ❤️ by David');
+// ---------- Anti-spam timestamp + godina ----------
+document.addEventListener('DOMContentLoaded', () => {
+  const nowStr = Date.now().toString();
+  document.querySelectorAll('form.contact-form input[name="ts"]').forEach(el => { el.value = nowStr; });
+
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+});
