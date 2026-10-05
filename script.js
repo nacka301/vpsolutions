@@ -1,44 +1,67 @@
-// VP Solutions — interakcije (jednostavno, bez frameworka)
+// VP Solutions — interakcije. Sadržaj radi i bez ovoga; ovo je progresivno poboljšanje.
 
-// ---------- Mobilni izbornik (full screen) ----------
+const hasGSAP = typeof window.gsap !== 'undefined';
+const hasST = hasGSAP && typeof window.ScrollTrigger !== 'undefined';
+const hasLenis = typeof window.Lenis !== 'undefined';
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const motion = !reduced;
+const isDesktop = window.matchMedia('(min-width: 960px)').matches;
+
+if (hasST) gsap.registerPlugin(ScrollTrigger);
+
+/* ---------- Lenis smooth scroll (samo desktop) ---------- */
+let lenis = null;
+if (hasLenis && hasGSAP && motion && isDesktop) {
+  lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+  document.documentElement.classList.add('lenis');
+  lenis.on('scroll', () => { if (hasST) ScrollTrigger.update(); });
+  gsap.ticker.add((t) => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+
+/* ---------- Smooth anchor + zatvaranje izbornika ---------- */
 const navToggle = document.getElementById('navToggle');
-const mobileMenu = document.getElementById('mobileMenu');
+const menu = document.getElementById('menu');
 
 function setMenu(open) {
-  if (!mobileMenu || !navToggle) return;
-  mobileMenu.classList.toggle('open', open);
-  mobileMenu.setAttribute('aria-hidden', String(!open));
+  if (!menu || !navToggle) return;
+  menu.classList.toggle('open', open);
+  menu.setAttribute('aria-hidden', String(!open));
   navToggle.setAttribute('aria-expanded', String(open));
   navToggle.innerHTML = open
     ? '<svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>'
     : '<svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>';
   document.body.style.overflow = open ? 'hidden' : '';
 }
-
-if (navToggle) {
-  navToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
-}
-if (mobileMenu) {
-  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
-}
+if (navToggle) navToggle.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 
-// ---------- Navbar blur pri scrollu + sticky CTA ----------
-const navbar = document.getElementById('navbar');
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href');
+    if (id === '#' || id === '#top') { }
+    const target = id === '#top' ? document.body : document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    setMenu(false);
+    const top = id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - 70;
+    if (lenis) lenis.scrollTo(top);
+    else window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
+  });
+});
+
+/* ---------- Nav blur + sticky CTA ---------- */
+const nav = document.getElementById('nav');
 const stickyCta = document.getElementById('stickyCta');
-const hero = document.getElementById('home');
-const contactSection = document.getElementById('kontakt');
+const heroEl = document.querySelector('.hero');
+const contactEl = document.getElementById('kontakt');
 
 function onScroll() {
   const y = window.scrollY;
-  if (navbar) navbar.classList.toggle('scrolled', y > 24);
-
-  // Sticky CTA: pojavi se nakon hero, a sakrij se kad dođemo do kontakta
-  if (stickyCta && hero) {
-    let show = y > hero.offsetHeight - 120;
-    if (contactSection && contactSection.getBoundingClientRect().top < window.innerHeight) {
-      show = false;
-    }
+  if (nav) nav.classList.toggle('scrolled', y > 24);
+  if (stickyCta && heroEl) {
+    let show = y > heroEl.offsetHeight - 120;
+    if (contactEl && contactEl.getBoundingClientRect().top < window.innerHeight) show = false;
     stickyCta.classList.toggle('show', show);
     stickyCta.setAttribute('aria-hidden', String(!show));
   }
@@ -46,104 +69,166 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-// ---------- Fade-up reveal (poštuje prefers-reduced-motion) ----------
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revealEls = document.querySelectorAll('.reveal');
+/* ---------- Split naslova u riječi ---------- */
+function splitWords(el) {
+  const text = el.textContent;
+  el.textContent = '';
+  el.classList.add('is-split');
+  text.split(/(\s+)/).forEach(tok => {
+    if (tok.trim() === '') { el.appendChild(document.createTextNode(' ')); return; }
+    const word = document.createElement('span');
+    word.className = 'word';
+    const inner = document.createElement('i');
+    inner.textContent = tok;
+    word.appendChild(inner);
+    el.appendChild(word);
+  });
+  return el.querySelectorAll('.word i');
+}
 
-if (prefersReduced || !('IntersectionObserver' in window)) {
-  revealEls.forEach(el => el.classList.add('is-visible'));
-} else {
+if (motion && hasGSAP) {
+  // Hero naslov — reveal pri učitavanju
+  const heroTitle = document.querySelector('.hero-title.split');
+  if (heroTitle) {
+    const words = splitWords(heroTitle);
+    gsap.set(words, { yPercent: 110 });
+    gsap.to(words, { yPercent: 0, duration: 0.9, ease: 'power3.out', stagger: 0.06, delay: 0.15 });
+  }
+  // Završni CTA naslov — reveal na scroll
+  const ctaTitle = document.querySelector('.cta-title.split');
+  if (ctaTitle && hasST) {
+    const words = splitWords(ctaTitle);
+    gsap.set(words, { yPercent: 110 });
+    gsap.to(words, { yPercent: 0, duration: 0.9, ease: 'power3.out', stagger: 0.06,
+      scrollTrigger: { trigger: ctaTitle, start: 'top 85%' } });
+  }
+}
+
+/* ---------- Fade-up reveal ---------- */
+const revealEls = Array.from(document.querySelectorAll('.reveal'));
+if (motion && hasST) {
+  revealEls.forEach(el => el.classList.add('pre'));
+  ScrollTrigger.batch('.reveal', {
+    start: 'top 88%',
+    onEnter: batch => batch.forEach((el, i) => setTimeout(() => { el.classList.remove('pre'); el.classList.add('in'); }, i * 80)),
+  });
+} else if (motion && 'IntersectionObserver' in window) {
+  revealEls.forEach(el => el.classList.add('pre'));
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        io.unobserve(entry.target);
-      }
-    });
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.remove('pre'); en.target.classList.add('in'); io.unobserve(en.target); } });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => io.observe(el));
 }
 
-// ---------- Chips: vrsta projekta ----------
-const chipGroup = document.getElementById('projectChips');
-const projectTypeInput = document.getElementById('projectType');
-if (chipGroup && projectTypeInput) {
-  chipGroup.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const wasActive = chip.classList.contains('active');
-      chipGroup.querySelectorAll('.chip').forEach(c => {
-        c.classList.remove('active');
-        c.setAttribute('aria-pressed', 'false');
-      });
-      if (!wasActive) {
-        chip.classList.add('active');
-        chip.setAttribute('aria-pressed', 'true');
-        projectTypeInput.value = chip.dataset.value || '';
-      } else {
-        projectTypeInput.value = '';
-      }
-    });
+/* ---------- Kinetička traka (scroll-linked) ---------- */
+if (motion && hasST) {
+  const track = document.getElementById('marquee');
+  if (track) gsap.to(track, { xPercent: -50, ease: 'none',
+    scrollTrigger: { trigger: '.marquee', start: 'top bottom', end: 'bottom top', scrub: true } });
+}
+
+/* ---------- Parallax slika u karticama radova ---------- */
+if (motion && hasST && isDesktop) {
+  document.querySelectorAll('[data-parallax]').forEach(img => {
+    gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: 'none',
+      scrollTrigger: { trigger: img.closest('.work-media'), start: 'top bottom', end: 'bottom top', scrub: true } });
   });
 }
 
-// ---------- Kontakt forma (zadržan API ugovor: /api/send-email) ----------
-const contactForm = document.querySelector('.contact-form');
-const formStatus = contactForm ? contactForm.querySelector('.form-status') : null;
+/* ---------- UTM capture ---------- */
+const utmField = document.getElementById('utmField');
+(function captureUtm() {
+  try {
+    const sp = new URLSearchParams(location.search);
+    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const found = {};
+    keys.forEach(k => { const v = sp.get(k); if (v) found[k] = v; });
+    let stored = sessionStorage.getItem('vps_utm');
+    if (Object.keys(found).length) { stored = JSON.stringify(found); sessionStorage.setItem('vps_utm', stored); }
+    if (utmField && stored) utmField.value = stored;
+  } catch (e) { /* no-op */ }
+})();
 
-let lastSubmitTime = 0;
-const SUBMIT_COOLDOWN = 60000; // 1 min između slanja
+/* ---------- Dvokoračna forma ---------- */
+const form = document.getElementById('contactForm');
+const projectType = document.getElementById('projectType');
+const stepChosen = document.getElementById('stepChosen');
+const stepBack = document.getElementById('stepBack');
+const choiceGrid = document.getElementById('choiceGrid');
 
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
+if (choiceGrid && form) {
+  choiceGrid.querySelectorAll('.choice').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.value || '';
+      if (projectType) projectType.value = val;
+      if (stepChosen) stepChosen.innerHTML = `Odabrano: <b>${val}</b>`;
+      form.setAttribute('data-step', '2');
+      const firstInput = form.querySelector('.step-2 input[name="name"]');
+      if (firstInput) setTimeout(() => firstInput.focus(), 50);
+    });
+  });
+}
+if (stepBack && form) {
+  stepBack.addEventListener('click', () => {
+    form.setAttribute('data-step', '1');
+    if (projectType) projectType.value = '';
+  });
+}
+
+/* ---------- Slanje forme (zadržan /api/send-email ugovor) ---------- */
+const formStatus = form ? form.querySelector('.form-status') : null;
+let lastSubmit = 0;
+const COOLDOWN = 60000;
+
+if (form) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const now = Date.now();
-    if (now - lastSubmitTime < SUBMIT_COOLDOWN) {
-      const remaining = Math.ceil((SUBMIT_COOLDOWN - (now - lastSubmitTime)) / 1000);
-      showStatus(`Molimo pričekajte ${remaining} s prije ponovnog slanja.`, 'error');
+    if (now - lastSubmit < COOLDOWN) {
+      showStatus(`Pričekajte ${Math.ceil((COOLDOWN - (now - lastSubmit)) / 1000)} s prije ponovnog slanja.`, 'error');
       return;
     }
-
-    const button = contactForm.querySelector('button[type="submit"]');
-    const originalText = button.textContent;
+    const button = form.querySelector('button[type="submit"]');
+    const original = button.textContent;
     button.textContent = 'Šaljem...';
     button.disabled = true;
 
-    const fd = new FormData(contactForm);
-    const projectType = (fd.get('projectType') || '').toString().trim();
+    const fd = new FormData(form);
+    const pt = (fd.get('projectType') || '').toString().trim();
+    const utm = (fd.get('utm') || '').toString().trim();
     let message = (fd.get('message') || '').toString();
-    if (projectType) message = `Vrsta projekta: ${projectType}\n\n${message}`;
+    const prefix = [];
+    if (pt) prefix.push(`Vrsta projekta: ${pt}`);
+    if (utm) prefix.push(`UTM: ${utm}`);
+    if (prefix.length) message = prefix.join('\n') + '\n\n' + message;
 
     const data = {
       name: fd.get('name'),
       email: fd.get('email'),
-      message: message,
-      hp: contactForm.querySelector('input[name="hp"]')?.value || '',
-      ts: contactForm.querySelector('input[name="ts"]')?.value || ''
+      message,
+      hp: form.querySelector('input[name="hp"]')?.value || '',
+      ts: form.querySelector('input[name="ts"]')?.value || ''
     };
 
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+      const res = await fetch('/api/send-email', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
       });
-      const result = await response.json();
-
-      if (response.ok && result.success) {
-        lastSubmitTime = now;
-        showStatus('Hvala! Vaš upit je poslan. Javljamo se na email u najkraćem roku.', 'success');
-        contactForm.reset();
-        contactForm.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-        if (projectTypeInput) projectTypeInput.value = '';
+      const result = await res.json();
+      if (res.ok && result.success) {
+        lastSubmit = now;
+        showStatus('Hvala! Vaš upit je poslan. Javljam se na email u najkraćem roku.', 'success');
+        form.reset();
+        form.setAttribute('data-step', '1');
+        if (projectType) projectType.value = '';
+        if (typeof fbq === 'function') fbq('track', 'Lead');
       } else {
         showStatus(result.error || 'Došlo je do greške. Pokušajte ponovno.', 'error');
       }
-    } catch (error) {
-      showStatus(`Greška u mreži: ${error.message}. Pišite nam na email.`, 'error');
+    } catch (err) {
+      showStatus(`Greška u mreži: ${err.message}. Pišite mi na email.`, 'error');
     }
-
-    button.textContent = originalText;
+    button.textContent = original;
     button.disabled = false;
   });
 }
@@ -156,11 +241,22 @@ function showStatus(text, type) {
   showStatus._t = setTimeout(() => { formStatus.className = 'form-status'; }, 8000);
 }
 
-// ---------- Anti-spam timestamp + godina ----------
-document.addEventListener('DOMContentLoaded', () => {
-  const nowStr = Date.now().toString();
-  document.querySelectorAll('form.contact-form input[name="ts"]').forEach(el => { el.value = nowStr; });
+/* ---------- Sigurnosna mreža: sadržaj mora biti vidljiv ----------
+   Ako animacija ne krene (npr. kartica učitana u pozadini, rAF pauziran),
+   nakon kratkog vremena osiguraj da je hero i vidljivi sadržaj otkriven. */
+setTimeout(() => {
+  document.querySelectorAll('.hero-title .word i, .cta-title .word i').forEach(i => {
+    if (hasGSAP) { try { gsap.set(i, { yPercent: 0 }); } catch (e) { i.style.transform = 'none'; } }
+    else i.style.transform = 'none';
+  });
+  document.querySelectorAll('.reveal.pre').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.remove('pre'); el.classList.add('in'); }
+  });
+}, 1800);
 
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+/* ---------- ts timestamp + godina ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('form#contactForm input[name="ts"]').forEach(el => { el.value = Date.now().toString(); });
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
 });

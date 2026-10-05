@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="hr" class="no-js">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>VP Solutions | Web stranice i aplikacije za obrte i male tvrtke</title>
-    <meta name="description" content="VP Solutions iz Osijeka izrađuje moderne web stranice i aplikacije za obrte i male tvrtke. Brzo, prilagođeno mobitelu, prvi prijedlog dizajna besplatno.">
+    <meta name="description" content="Izrađujem moderne web stranice i aplikacije za obrte i male tvrtke iz Osijeka. Brzo, prilagođeno mobitelu, prvi prijedlog dizajna besplatno.">
     <link rel="canonical" href="https://vpsolution.vercel.app/">
     <meta name="keywords" content="izrada web stranica Osijek, web stranice za obrte, aplikacije za male tvrtke, online naručivanje, web developer Osijek, VP Solutions">
-    <meta name="author" content="VP Solutions">
+    <meta name="author" content="David — VP Solutions">
     <meta name="theme-color" content="#0A0A0B">
+
+    <!-- no-JS -> JS prekidač (prije CSS-a da izbjegnemo bljesak) -->
+    <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0YGB2DQ6Q"></script>
@@ -19,10 +22,10 @@
         gtag('config', 'G-Z0YGB2DQ6Q');
     </script>
 
-    <!-- Vercel Web Analytics (privacy-friendly) -->
+    <!-- Vercel Web Analytics -->
     <script defer src="/_vercel/insights/script.js"></script>
 
-    <!-- JSON-LD Schema (ProfessionalService) -->
+    <!-- JSON-LD ProfessionalService -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -33,59 +36,29 @@
         "priceRange": "€€",
         "email": "vpsolutions.booking@gmail.com",
         "telephone": "+385998535380",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Osijek",
-            "addressCountry": "HR"
-        },
-        "areaServed": {
-            "@type": "Country",
-            "name": "Hrvatska"
-        }
+        "founder": { "@type": "Person", "name": "David" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Osijek", "addressCountry": "HR" },
+        "areaServed": { "@type": "Country", "name": "Hrvatska" }
     }
     </script>
 
-    <!-- JSON-LD Schema (FAQPage) -->
+    <!-- JSON-LD FAQPage -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Koliko traje izrada web stranice?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Jednostavniju one-page stranicu isporučujemo u roku od 7 dana. Veće stranice i aplikacije ovise o opsegu, no rok dogovaramo unaprijed prije početka rada." }
-            },
-            {
-                "@type": "Question",
-                "name": "Koliko košta izrada web stranice?",
-                "acceptedAnswer": { "@type": "Answer", "text": "One-page stranica kreće od 190 €, stranica do 5 podstranica od 290 €, a sustav za online naručivanje je 29 €/mjesečno bez provizije. Nakon kratkog razgovora šaljemo konkretnu ponudu." }
-            },
-            {
-                "@type": "Question",
-                "name": "Je li prvi prijedlog dizajna stvarno besplatan?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Da. Napravimo prvi prijedlog dizajna bez naplate i bez obveze. Tek ako vam se svidi i želite nastaviti, dogovaramo izradu." }
-            },
-            {
-                "@type": "Question",
-                "name": "Tko je vlasnik domene i hostinga?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Domena i hosting glase na vas. Vi ste vlasnik svega i u svakom trenutku možete preuzeti pristup." }
-            },
-            {
-                "@type": "Question",
-                "name": "Radite li izmjene nakon objave stranice?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Da. Nakon objave smo tu za podršku i izmjene. Manje izmjene naplaćujemo 15 €/h, a veće dorade dogovaramo unaprijed." }
-            },
-            {
-                "@type": "Question",
-                "name": "Je li stranica prilagođena mobitelu?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Uvijek. Svaku stranicu radimo prvo za mobitel jer većina posjetitelja dolazi s telefona, a tek onda za računalo." }
-            }
+            { "@type": "Question", "name": "Koliko traje izrada web stranice?", "acceptedAnswer": { "@type": "Answer", "text": "Jednostavniju one-page stranicu isporučujem u roku od 7 dana. Veće stranice i aplikacije ovise o opsegu, no rok dogovaram unaprijed prije početka rada." } },
+            { "@type": "Question", "name": "Koliko košta izrada web stranice?", "acceptedAnswer": { "@type": "Answer", "text": "One-page stranica kreće od 190 €, stranica do 5 podstranica od 290 €, a sustav za online naručivanje je 29 €/mjesečno bez provizije. Nakon kratkog razgovora šaljem konkretnu ponudu." } },
+            { "@type": "Question", "name": "Je li prvi prijedlog dizajna stvarno besplatan?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Napravim prvi prijedlog dizajna bez naplate i bez obveze. Tek ako vam se svidi i želite nastaviti, dogovaramo izradu." } },
+            { "@type": "Question", "name": "Tko je vlasnik domene i hostinga?", "acceptedAnswer": { "@type": "Answer", "text": "Domena i hosting glase na vas. Vi ste vlasnik svega i u svakom trenutku možete preuzeti pristup." } },
+            { "@type": "Question", "name": "Radite li izmjene nakon objave stranice?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Nakon objave sam tu za podršku i izmjene. Manje izmjene naplaćujem 15 €/h, a veće dorade dogovaramo unaprijed." } },
+            { "@type": "Question", "name": "Je li stranica prilagođena mobitelu?", "acceptedAnswer": { "@type": "Answer", "text": "Uvijek. Svaku stranicu radim prvo za mobitel jer većina posjetitelja dolazi s telefona, a tek onda za računalo." } }
         ]
     }
     </script>
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vpsolution.vercel.app/">
     <meta property="og:site_name" content="VP Solutions">
@@ -95,262 +68,246 @@
     <meta property="og:image" content="https://vpsolution.vercel.app/images/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="VP Solutions - izrada web stranica i aplikacija">
+    <meta property="og:image:alt" content="VP Solutions — izrada web stranica i aplikacija">
 
-    <!-- Twitter Card -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="VP Solutions | Web stranice i aplikacije za obrte i male tvrtke">
     <meta name="twitter:description" content="Moderne web stranice i aplikacije iz Osijeka. Prvi prijedlog dizajna besplatno, bez obveze.">
     <meta name="twitter:image" content="https://vpsolution.vercel.app/images/og-image.png">
 
-    <!-- Favicon (SVG monogram, accent) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A0A0B'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='54' font-weight='700' fill='%237C5CFF' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23C6F432'/%3E%3Ctext x='50' y='70' font-family='Arial,sans-serif' font-size='56' font-weight='700' fill='%230A0A0B' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Lucide icon sprite (inline SVG, no emoji) -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-        <defs>
-            <g id="i-globe"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></g>
-            <g id="i-phone"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></g>
-            <g id="i-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></g>
-            <g id="i-cpu"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></g>
-            <g id="i-arrow"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></g>
-            <g id="i-check"><path d="M20 6 9 17l-5-5"/></g>
-            <g id="i-mail"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g>
-            <g id="i-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></g>
-            <g id="i-clock"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g>
-            <g id="i-server"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><path d="M6 7h.01M6 17h.01"/></g>
-            <g id="i-headset"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a9 9 0 0 1 18 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></g>
-            <g id="i-zap"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></g>
-            <g id="i-chat"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></g>
-            <g id="i-plus"><path d="M5 12h14M12 5v14"/></g>
-            <g id="i-menu"><path d="M4 6h16M4 12h16M4 18h16"/></g>
-            <g id="i-x"><path d="M18 6 6 18M6 6l12 12"/></g>
-        </defs>
-    </svg>
+    <!-- Grain overlay -->
+    <div class="grain" aria-hidden="true"></div>
 
-    <!-- Navigacija -->
-    <header class="navbar" id="navbar">
-        <div class="container nav-inner">
-            <a href="#home" class="logo">
-                <span class="logo-mark">V</span>
-                <span class="logo-text">vpsolutions</span>
-            </a>
+    <!-- Lucide sprite -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+        <g id="i-arrow"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></g>
+        <g id="i-arrow-ur"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></g>
+        <g id="i-check"><path d="M20 6 9 17l-5-5"/></g>
+        <g id="i-mail"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g>
+        <g id="i-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></g>
+        <g id="i-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></g>
+        <g id="i-plus"><path d="M5 12h14M12 5v14"/></g>
+        <g id="i-menu"><path d="M4 7h16M4 17h16"/></g>
+        <g id="i-x"><path d="M18 6 6 18M6 6l12 12"/></g>
+        <g id="i-arrow-left"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></g>
+    </defs></svg>
+
+    <!-- Nav -->
+    <header class="nav" id="nav">
+        <div class="container nav-row">
+            <a href="#top" class="brand"><span class="brand-mark">V</span><span class="brand-name">vpsolutions</span></a>
             <nav class="nav-links" aria-label="Glavna navigacija">
                 <a href="#radovi">Radovi</a>
                 <a href="#usluge">Usluge</a>
                 <a href="#cjenik">Cjenik</a>
+                <a href="#o-meni">O meni</a>
                 <a href="#faq">FAQ</a>
-                <a href="#o-nama">O nama</a>
             </nav>
-            <a href="#kontakt" class="btn btn-primary btn-sm nav-cta">Zatraži ponudu</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="mobileMenu">
+            <a href="#kontakt" class="btn btn-accent btn-sm nav-cta">Zatraži ponudu</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="menu">
                 <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
             </button>
         </div>
     </header>
 
-    <!-- Mobilni izbornik (full screen) -->
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <nav class="mobile-menu-links" aria-label="Mobilna navigacija">
-            <a href="#radovi">Radovi</a>
-            <a href="#usluge">Usluge</a>
-            <a href="#cjenik">Cjenik</a>
-            <a href="#faq">FAQ</a>
-            <a href="#o-nama">O nama</a>
-            <a href="#kontakt" class="btn btn-primary">Zatraži ponudu</a>
+    <div class="menu" id="menu" aria-hidden="true">
+        <nav class="menu-links" aria-label="Mobilna navigacija">
+            <a href="#radovi"><span>01</span> Radovi</a>
+            <a href="#usluge"><span>02</span> Usluge</a>
+            <a href="#cjenik"><span>03</span> Cjenik</a>
+            <a href="#o-meni"><span>04</span> O meni</a>
+            <a href="#faq"><span>05</span> FAQ</a>
+            <a href="#kontakt" class="btn btn-accent menu-cta">Zatraži ponudu</a>
         </nav>
     </div>
-    <main>
+
+    <main id="top">
     <!-- Hero -->
-    <section id="home" class="hero">
-        <div class="container hero-grid">
+    <section class="hero">
+        <div class="container hero-inner">
             <div class="hero-copy">
-                <span class="eyebrow"><span class="eyebrow-dot"></span>Osijek · web i aplikacije</span>
-                <h1>Web stranice i aplikacije za obrte i male tvrtke.</h1>
-                <p class="hero-sub">Brzo, moderno i prilagođeno mobitelu. Prvi prijedlog dizajna besplatno, bez obveze.</p>
-                <div class="hero-actions">
-                    <a href="#kontakt" class="btn btn-primary">Zatraži ponudu</a>
+                <span class="eyebrow"><span class="eyebrow-dot"></span>Osijek · Hrvatska</span>
+                <h1 class="hero-title split">Web stranice i aplikacije koje rade za vaš posao.</h1>
+                <p class="hero-sub reveal">Dizajniram i razvijam brze, moderne stranice i aplikacije po mjeri — od ideje do objave radim izravno s vama.</p>
+                <div class="hero-actions reveal">
+                    <a href="#kontakt" class="btn btn-accent">Zatraži ponudu</a>
                     <a href="#radovi" class="btn btn-ghost">Pogledaj radove</a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="browser">
-                    <div class="browser-bar">
-                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                        <span class="browser-url">grillbox.hr</span>
-                    </div>
-                    <img src="images/work-grillbox.webp" alt="Primjer web stranice koju je izradio VP Solutions" width="1280" height="800" loading="eager" decoding="async">
+            <div class="hero-visual reveal" aria-hidden="false">
+                <div class="phone">
+                    <span class="phone-notch"></span>
+                    <img src="images/work-grillbox-mobile.webp" alt="Primjer mobilne web stranice koju sam izradio" width="390" height="844" loading="eager" decoding="async">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Traka povjerenja -->
-    <section class="trust" aria-label="Zašto VP Solutions">
-        <div class="container trust-grid">
-            <div class="trust-item reveal"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>Isporuka od 7 dana</span></div>
-            <div class="trust-item reveal"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span>Prilagođeno mobitelu</span></div>
-            <div class="trust-item reveal"><svg class="icon" aria-hidden="true"><use href="#i-server"/></svg><span>Hosting na vaše ime</span></div>
-            <div class="trust-item reveal"><svg class="icon" aria-hidden="true"><use href="#i-headset"/></svg><span>Podrška nakon objave</span></div>
+    <!-- Kinetička traka -->
+    <section class="marquee" aria-hidden="true">
+        <div class="marquee-track" id="marquee">
+            <span>Web<i>·</i>Aplikacije<i>·</i>Automatizacija<i>·</i>Web<i>·</i>Aplikacije<i>·</i>Automatizacija<i>·</i></span>
         </div>
     </section>
 
     <!-- Radovi -->
     <section id="radovi" class="section">
         <div class="container">
-            <div class="section-head reveal">
-                <h2>Radovi</h2>
-                <p>Nekoliko stranica i aplikacija koje smo izradili.</p>
-            </div>
-            <div class="work-grid">
-                <article class="work-card work-card--wide reveal">
-                    <a class="work-media" href="https://grillbox-hr.vercel.app/smash" target="_blank" rel="noopener noreferrer" aria-label="Otvori Grillbox Smash">
-                        <img src="images/work-grillbox.webp" alt="Grillbox Smash — web stranica lokala" width="1280" height="800" loading="lazy" decoding="async">
-                    </a>
-                    <div class="work-body">
-                        <h3>Grillbox Smash</h3>
-                        <p>Web stranica i meni za smash burger lokal, s naglaskom na brzu narudžbu.</p>
-                        <div class="tags"><span>Web stranica</span><span>Meni</span><span>Vercel</span></div>
-                        <a class="link-arrow" href="https://grillbox-hr.vercel.app/smash" target="_blank" rel="noopener noreferrer">Pogledaj <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-                    </div>
-                </article>
+            <header class="sec-head reveal">
+                <span class="sec-kicker">Odabrani radovi</span>
+                <h2>Stranice i aplikacije koje sam izradio.</h2>
+            </header>
 
-                <article class="work-card reveal">
+            <div class="works">
+                <article class="work reveal work--lg">
                     <a class="work-media" href="https://pravotek.com" target="_blank" rel="noopener noreferrer" aria-label="Otvori PravoTek">
-                        <img src="images/work-pravotek.webp" alt="PravoTek — web aplikacija za odvjetnike" width="1280" height="800" loading="lazy" decoding="async">
+                        <span class="work-shot"><img src="images/work-pravotek.webp" alt="PravoTek — desktop prikaz" width="1280" height="800" loading="lazy" decoding="async" data-parallax></span>
+                        <span class="work-phone"><img src="images/work-pravotek-mobile.webp" alt="PravoTek — mobilni prikaz" width="390" height="844" loading="lazy" decoding="async"></span>
                     </a>
-                    <div class="work-body">
+                    <div class="work-info">
                         <h3>PravoTek</h3>
-                        <p>Web aplikacija koja odvjetnicima automatski generira troškovnike i sudske pristojbe.</p>
-                        <div class="tags"><span>Next.js</span><span>.NET</span><span>Supabase</span></div>
-                        <a class="link-arrow" href="https://pravotek.com" target="_blank" rel="noopener noreferrer">Pogledaj <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                        <p class="work-prob">Odvjetnici troškovnike rade ručno i gube sate — PravoTek ih generira automatski prema tarifi.</p>
+                        <dl class="work-meta">
+                            <div><dt>Uloga</dt><dd>Dizajn i razvoj (full-stack)</dd></div>
+                            <div><dt>Tehnologije</dt><dd>Next.js · .NET · Supabase</dd></div>
+                        </dl>
+                        <a class="link-arrow" href="https://pravotek.com" target="_blank" rel="noopener noreferrer">pravotek.com <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
                     </div>
                 </article>
 
-                <article class="work-card reveal">
+                <article class="work reveal">
+                    <a class="work-media" href="https://grillbox-hr.vercel.app/smash" target="_blank" rel="noopener noreferrer" aria-label="Otvori Grillbox Smash">
+                        <span class="work-shot"><img src="images/work-grillbox.webp" alt="Grillbox Smash — desktop prikaz" width="1280" height="800" loading="lazy" decoding="async" data-parallax></span>
+                        <span class="work-phone"><img src="images/work-grillbox-mobile.webp" alt="Grillbox Smash — mobilni prikaz" width="390" height="844" loading="lazy" decoding="async"></span>
+                    </a>
+                    <div class="work-info">
+                        <h3>Grillbox Smash</h3>
+                        <p class="work-prob">Lokalu je trebao digitalni meni i brza narudžba bez provizije posrednika.</p>
+                        <dl class="work-meta">
+                            <div><dt>Uloga</dt><dd>Dizajn i razvoj</dd></div>
+                            <div><dt>Tehnologije</dt><dd>Web app · Vercel</dd></div>
+                        </dl>
+                        <a class="link-arrow" href="https://grillbox-hr.vercel.app/smash" target="_blank" rel="noopener noreferrer">grillbox-hr.vercel.app <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+                    </div>
+                </article>
+
+                <article class="work reveal">
                     <a class="work-media" href="https://znr-procjena-rizika.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Otvori ZNR procjenu rizika">
-                        <img src="images/work-znr.webp" alt="ZNR — aplikacija za procjenu rizika" width="1280" height="800" loading="lazy" decoding="async">
+                        <span class="work-shot"><img src="images/work-znr.webp" alt="ZNR — desktop prikaz" width="1280" height="800" loading="lazy" decoding="async" data-parallax></span>
+                        <span class="work-phone"><img src="images/work-znr-mobile.webp" alt="ZNR — mobilni prikaz" width="390" height="844" loading="lazy" decoding="async"></span>
                     </a>
-                    <div class="work-body">
+                    <div class="work-info">
                         <h3>ZNR — Procjena rizika</h3>
-                        <p>Aplikacija koja vodi kroz procjenu rizika na radnom mjestu i izrađuje dokument.</p>
-                        <div class="tags"><span>Web aplikacija</span><span>Vercel</span></div>
-                        <a class="link-arrow" href="https://znr-procjena-rizika.vercel.app" target="_blank" rel="noopener noreferrer">Pogledaj <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                        <p class="work-prob">Procjena rizika na radnom mjestu vodila se ručno — aplikacija vodi kroz korake i izrađuje dokument.</p>
+                        <dl class="work-meta">
+                            <div><dt>Uloga</dt><dd>Dizajn i razvoj</dd></div>
+                            <div><dt>Tehnologije</dt><dd>Web aplikacija · Vercel</dd></div>
+                        </dl>
+                        <a class="link-arrow" href="https://znr-procjena-rizika.vercel.app" target="_blank" rel="noopener noreferrer">znr-procjena-rizika.vercel.app <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
                     </div>
                 </article>
 
-                <article class="work-card reveal">
-                    <a class="work-media" href="https://lovrencic-trans.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Otvori Lovrenčić Trans">
-                        <img src="images/work-lovrencic.webp" alt="Lovrenčić Trans — poslovna web stranica" width="1280" height="800" loading="lazy" decoding="async">
-                    </a>
-                    <div class="work-body">
-                        <h3>Lovrenčić Trans</h3>
-                        <p>Prezentacijska web stranica za transportni obrt, prilagođena mobitelu.</p>
-                        <div class="tags"><span>Web stranica</span><span>Responsive</span></div>
-                        <a class="link-arrow" href="https://lovrencic-trans.vercel.app" target="_blank" rel="noopener noreferrer">Pogledaj <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-                    </div>
-                </article>
-
-                <article class="work-card reveal">
-                    <a class="work-media" href="https://web-stranica-cistoca.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Otvori stranicu za čišćenje">
-                        <img src="images/work-cistoca.webp" alt="Usluge čišćenja — web stranica" width="1280" height="800" loading="lazy" decoding="async">
-                    </a>
-                    <div class="work-body">
-                        <h3>Usluge čišćenja</h3>
-                        <p>Web stranica za obrt za čišćenje s jasnim pozivom na kontakt.</p>
-                        <div class="tags"><span>Web stranica</span><span>Responsive</span></div>
-                        <a class="link-arrow" href="https://web-stranica-cistoca.vercel.app" target="_blank" rel="noopener noreferrer">Pogledaj <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-                    </div>
-                </article>
-
-                <article class="work-card work-card--wide reveal">
+                <article class="work reveal work--lg">
                     <a class="work-media" href="https://fialamont.com" target="_blank" rel="noopener noreferrer" aria-label="Otvori Fiala Mont">
-                        <img src="images/work-fialamont.webp" alt="Fiala Mont — poslovna web stranica" width="1280" height="800" loading="lazy" decoding="async">
+                        <span class="work-shot"><img src="images/work-fialamont.webp" alt="Fiala Mont — desktop prikaz" width="1280" height="800" loading="lazy" decoding="async" data-parallax></span>
+                        <span class="work-phone"><img src="images/work-fialamont-mobile.webp" alt="Fiala Mont — mobilni prikaz" width="390" height="844" loading="lazy" decoding="async"></span>
                     </a>
-                    <div class="work-body">
+                    <div class="work-info">
                         <h3>Fiala Mont</h3>
-                        <p>Moderna prezentacijska web stranica za montažni obrt, s kontakt formom.</p>
-                        <div class="tags"><span>HTML/CSS/JS</span><span>Vercel</span></div>
-                        <a class="link-arrow" href="https://fialamont.com" target="_blank" rel="noopener noreferrer">Pogledaj <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                        <p class="work-prob">Montažnom obrtu trebala je moderna stranica koja gradi povjerenje i donosi upite.</p>
+                        <dl class="work-meta">
+                            <div><dt>Uloga</dt><dd>Dizajn i razvoj</dd></div>
+                            <div><dt>Tehnologije</dt><dd>HTML/CSS/JS · Vercel</dd></div>
+                        </dl>
+                        <a class="link-arrow" href="https://fialamont.com" target="_blank" rel="noopener noreferrer">fialamont.com <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+                    </div>
+                </article>
+
+                <article class="work reveal">
+                    <a class="work-media" href="https://lovrencic-trans.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Otvori Lovrenčić Trans">
+                        <span class="work-shot"><img src="images/work-lovrencic.webp" alt="Lovrenčić Trans — desktop prikaz" width="1280" height="800" loading="lazy" decoding="async" data-parallax></span>
+                        <span class="work-phone"><img src="images/work-lovrencic-mobile.webp" alt="Lovrenčić Trans — mobilni prikaz" width="390" height="844" loading="lazy" decoding="async"></span>
+                    </a>
+                    <div class="work-info">
+                        <h3>Lovrenčić Trans</h3>
+                        <p class="work-prob">Transportnom obrtu trebala je jednostavna, uredna stranica prilagođena mobitelu.</p>
+                        <dl class="work-meta">
+                            <div><dt>Uloga</dt><dd>Dizajn i razvoj</dd></div>
+                            <div><dt>Tehnologije</dt><dd>Web stranica · Responsive</dd></div>
+                        </dl>
+                        <a class="link-arrow" href="https://lovrencic-trans.vercel.app" target="_blank" rel="noopener noreferrer">lovrencic-trans.vercel.app <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+                    </div>
+                </article>
+
+                <article class="work reveal">
+                    <a class="work-media" href="https://web-stranica-cistoca.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Otvori stranicu za čišćenje">
+                        <span class="work-shot"><img src="images/work-cistoca.webp" alt="Usluge čišćenja — desktop prikaz" width="1280" height="800" loading="lazy" decoding="async" data-parallax></span>
+                        <span class="work-phone"><img src="images/work-cistoca-mobile.webp" alt="Usluge čišćenja — mobilni prikaz" width="390" height="844" loading="lazy" decoding="async"></span>
+                    </a>
+                    <div class="work-info">
+                        <h3>Usluge čišćenja</h3>
+                        <p class="work-prob">Obrtu za čišćenje trebala je stranica s jasnom ponudom i pozivom na kontakt.</p>
+                        <dl class="work-meta">
+                            <div><dt>Uloga</dt><dd>Dizajn i razvoj</dd></div>
+                            <div><dt>Tehnologije</dt><dd>Web stranica · Responsive</dd></div>
+                        </dl>
+                        <a class="link-arrow" href="https://web-stranica-cistoca.vercel.app" target="_blank" rel="noopener noreferrer">web-stranica-cistoca.vercel.app <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- Usluge -->
-    <section id="usluge" class="section section--alt">
+    <!-- Usluge (popis 01-04) -->
+    <section id="usluge" class="section section--line">
         <div class="container">
-            <div class="section-head reveal">
-                <h2>Usluge</h2>
-                <p>Ono što najčešće radimo za obrte i male tvrtke.</p>
-            </div>
-            <div class="service-grid">
-                <div class="service-card reveal">
-                    <span class="service-ico"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg></span>
-                    <h3>Web stranice</h3>
-                    <p>Moderna, brza stranica koja dobro izgleda na mobitelu i gradi povjerenje kod klijenata.</p>
-                </div>
-                <div class="service-card reveal">
-                    <span class="service-ico"><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg></span>
-                    <h3>Aplikacije i sustavi</h3>
-                    <p>Alati po mjeri za vaše procese — od evidencija do internih sustava za svakodnevni rad.</p>
-                </div>
-                <div class="service-card reveal">
-                    <span class="service-ico"><svg class="icon" aria-hidden="true"><use href="#i-cart"/></svg></span>
-                    <h3>Online naručivanje za lokale</h3>
-                    <p>Digitalni meni i narudžbe za ugostitelje, bez provizije po narudžbi.</p>
-                </div>
-                <div class="service-card reveal">
-                    <span class="service-ico"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></span>
-                    <h3>Automatizacija i AI</h3>
-                    <p>Automatiziramo ponavljajuće zadatke i integriramo AI gdje stvarno štedi vrijeme.</p>
-                </div>
-            </div>
+            <header class="sec-head reveal">
+                <span class="sec-kicker">Usluge</span>
+                <h2>Što radim.</h2>
+            </header>
+            <ul class="svc-list">
+                <li class="svc reveal"><a href="#kontakt"><span class="svc-num">01</span><span class="svc-name">Web stranice</span><span class="svc-desc">Moderna, brza stranica koja dobro izgleda na mobitelu i gradi povjerenje.</span><svg class="icon svc-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+                <li class="svc reveal"><a href="#kontakt"><span class="svc-num">02</span><span class="svc-name">Aplikacije i sustavi</span><span class="svc-desc">Alati po mjeri za vaše procese — evidencije, interni sustavi, portali.</span><svg class="icon svc-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+                <li class="svc reveal"><a href="#kontakt"><span class="svc-num">03</span><span class="svc-name">Online naručivanje za lokale</span><span class="svc-desc">Digitalni meni i narudžbe za ugostitelje, bez provizije po narudžbi.</span><svg class="icon svc-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+                <li class="svc reveal"><a href="#kontakt"><span class="svc-num">04</span><span class="svc-name">Automatizacija i AI</span><span class="svc-desc">Automatiziram ponavljajuće zadatke i integriram AI gdje stvarno štedi vrijeme.</span><svg class="icon svc-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            </ul>
         </div>
     </section>
 
     <!-- Proces -->
-    <section id="proces" class="section">
+    <section class="section">
         <div class="container">
-            <div class="section-head reveal">
-                <h2>Kako radimo</h2>
-                <p>Tri jednostavna koraka od ideje do objave.</p>
-            </div>
+            <header class="sec-head reveal">
+                <span class="sec-kicker">Proces</span>
+                <h2>Od ideje do objave u tri koraka.</h2>
+            </header>
             <ol class="process">
-                <li class="process-step reveal">
-                    <span class="process-num">1</span>
-                    <h3>Razgovor i besplatni prijedlog</h3>
-                    <p>Čujemo što vam treba i napravimo prvi prijedlog dizajna — besplatno i bez obveze.</p>
-                </li>
-                <li class="process-step reveal">
-                    <span class="process-num">2</span>
-                    <h3>Izrada i dorade</h3>
-                    <p>Gradimo stranicu i zajedno je doradimo dok ne budete zadovoljni.</p>
-                </li>
-                <li class="process-step reveal">
-                    <span class="process-num">3</span>
-                    <h3>Objava i podrška</h3>
-                    <p>Objavljujemo stranicu na vašu domenu i ostajemo tu za izmjene i podršku.</p>
-                </li>
+                <li class="process-step reveal"><span class="process-num">1</span><h3>Razgovor i besplatni prijedlog</h3><p>Čujem što vam treba i napravim prvi prijedlog dizajna — besplatno i bez obveze.</p></li>
+                <li class="process-step reveal"><span class="process-num">2</span><h3>Izrada i dorade</h3><p>Gradim stranicu i zajedno je doradimo dok ne budete zadovoljni.</p></li>
+                <li class="process-step reveal"><span class="process-num">3</span><h3>Objava i podrška</h3><p>Objavljujem stranicu na vašu domenu i ostajem tu za izmjene i podršku.</p></li>
             </ol>
         </div>
     </section>
 
     <!-- Cjenik -->
-    <section id="cjenik" class="section section--alt">
+    <section id="cjenik" class="section section--line">
         <div class="container">
-            <div class="section-head reveal">
-                <h2>Cjenik</h2>
-                <p>Jasne cijene, bez skrivenih troškova.</p>
-            </div>
+            <header class="sec-head reveal">
+                <span class="sec-kicker">Cjenik</span>
+                <h2>Jasne cijene, bez skrivenih troškova.</h2>
+            </header>
             <div class="price-grid">
                 <div class="price-card reveal">
                     <h3>One-page</h3>
@@ -363,7 +320,6 @@
                     </ul>
                     <a href="#kontakt" class="btn btn-ghost btn-block">Zatraži ponudu</a>
                 </div>
-
                 <div class="price-card price-card--featured reveal">
                     <span class="price-badge">Najčešće</span>
                     <h3>Web stranica do 5 podstranica</h3>
@@ -375,9 +331,8 @@
                         <li><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg> Kontakt forma i mape</li>
                         <li><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg> Osnovni SEO</li>
                     </ul>
-                    <a href="#kontakt" class="btn btn-primary btn-block">Zatraži ponudu</a>
+                    <a href="#kontakt" class="btn btn-accent btn-block">Zatraži ponudu</a>
                 </div>
-
                 <div class="price-card reveal">
                     <h3>Online naručivanje</h3>
                     <div class="price">29 <span class="price-cur">€/mj</span></div>
@@ -394,142 +349,110 @@
         </div>
     </section>
 
+    <!-- O meni -->
+    <section id="o-meni" class="section">
+        <div class="container container--narrow about reveal">
+            <span class="sec-kicker">O meni</span>
+            <p class="about-lead">Ja sam David, student programskog inženjerstva na FERIT-u u Osijeku. Pod imenom VP Solutions razvijam web stranice i aplikacije za obrte i male tvrtke.</p>
+            <p class="about-lead">Radim izravno s klijentom, bez posrednika — od prvog razgovora do objave i podrške sve ide preko mene. Najviše volim projekte gdje se brzo vidi rezultat: uredna stranica, jasna poruka i više upita.</p>
+            <a class="link-arrow" href="https://github.com/nacka301" target="_blank" rel="noopener noreferrer"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg> github.com/nacka301</a>
+        </div>
+    </section>
+
     <!-- FAQ -->
-    <section id="faq" class="section">
+    <section id="faq" class="section section--line">
         <div class="container container--narrow">
-            <div class="section-head reveal">
-                <h2>Česta pitanja</h2>
-                <p>Kratko i jasno o roku, cijeni i tome što dobivate.</p>
-            </div>
+            <header class="sec-head reveal">
+                <span class="sec-kicker">FAQ</span>
+                <h2>Česta pitanja.</h2>
+            </header>
             <div class="faq">
-                <details class="faq-item reveal">
-                    <summary>Koliko traje izrada web stranice?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-                    <div class="faq-answer"><p>Jednostavniju one-page stranicu isporučujemo u roku od 7 dana. Veće stranice i aplikacije ovise o opsegu, no rok dogovaramo unaprijed prije početka rada.</p></div>
-                </details>
-                <details class="faq-item reveal">
-                    <summary>Koliko košta izrada?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-                    <div class="faq-answer"><p>One-page kreće od 190 €, stranica do 5 podstranica od 290 €, a online naručivanje je 29 €/mjesečno bez provizije. Nakon kratkog razgovora šaljemo konkretnu ponudu.</p></div>
-                </details>
-                <details class="faq-item reveal">
-                    <summary>Je li prvi prijedlog dizajna stvarno besplatan?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-                    <div class="faq-answer"><p>Da. Napravimo prvi prijedlog bez naplate i bez obveze. Tek ako vam se svidi i želite nastaviti, dogovaramo izradu.</p></div>
-                </details>
-                <details class="faq-item reveal">
-                    <summary>Tko je vlasnik domene i hostinga?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-                    <div class="faq-answer"><p>Domena i hosting glase na vas. Vi ste vlasnik svega i u svakom trenutku možete preuzeti pristup.</p></div>
-                </details>
-                <details class="faq-item reveal">
-                    <summary>Radite li izmjene nakon objave?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-                    <div class="faq-answer"><p>Da. Nakon objave smo tu za podršku i izmjene. Manje izmjene naplaćujemo 15 €/h, a veće dorade dogovaramo unaprijed.</p></div>
-                </details>
-                <details class="faq-item reveal">
-                    <summary>Je li stranica prilagođena mobitelu?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-                    <div class="faq-answer"><p>Uvijek. Svaku stranicu radimo prvo za mobitel jer većina posjetitelja dolazi s telefona, a tek onda za računalo.</p></div>
-                </details>
+                <details class="faq-item reveal"><summary>Koliko traje izrada web stranice?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="faq-answer"><p>Jednostavniju one-page stranicu isporučujem u roku od 7 dana. Veće stranice i aplikacije ovise o opsegu, no rok dogovaram unaprijed prije početka rada.</p></div></details>
+                <details class="faq-item reveal"><summary>Koliko košta izrada?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="faq-answer"><p>One-page kreće od 190 €, stranica do 5 podstranica od 290 €, a online naručivanje je 29 €/mjesečno bez provizije. Nakon kratkog razgovora šaljem konkretnu ponudu.</p></div></details>
+                <details class="faq-item reveal"><summary>Je li prvi prijedlog dizajna stvarno besplatan?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="faq-answer"><p>Da. Napravim prvi prijedlog bez naplate i bez obveze. Tek ako vam se svidi i želite nastaviti, dogovaramo izradu.</p></div></details>
+                <details class="faq-item reveal"><summary>Tko je vlasnik domene i hostinga?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="faq-answer"><p>Domena i hosting glase na vas. Vi ste vlasnik svega i u svakom trenutku možete preuzeti pristup.</p></div></details>
+                <details class="faq-item reveal"><summary>Radite li izmjene nakon objave?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="faq-answer"><p>Da. Nakon objave sam tu za podršku i izmjene. Manje izmjene naplaćujem 15 €/h, a veće dorade dogovaramo unaprijed.</p></div></details>
+                <details class="faq-item reveal"><summary>Je li stranica prilagođena mobitelu?<svg class="icon faq-chevron" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="faq-answer"><p>Uvijek. Svaku stranicu radim prvo za mobitel jer većina posjetitelja dolazi s telefona, a tek onda za računalo.</p></div></details>
             </div>
         </div>
     </section>
 
-    <!-- O nama -->
-    <section id="o-nama" class="section section--alt">
-        <div class="container container--narrow about">
-            <div class="section-head reveal">
-                <h2>O nama</h2>
-            </div>
-            <p class="about-lead reveal">Dvojica smo developera iz Osijeka. Radimo izravno s vama, bez posrednika i agencijskog nadmetanja — dogovor, izrada i podrška idu direktno preko nas.</p>
-            <p class="about-lead reveal">Volimo raditi s obrtima i malim tvrtkama jer tu se najbrže vidi rezultat: uredna stranica, jasna poruka i više upita.</p>
+    <!-- Završni CTA -->
+    <section class="cta">
+        <div class="container cta-inner reveal">
+            <h2 class="cta-title split">Imate projekt?</h2>
+            <p>Napišite par rečenica o tome što vam treba — javljam se s prijedlogom i cijenom.</p>
+            <a href="#kontakt" class="btn btn-accent btn-lg">Zatraži ponudu</a>
         </div>
     </section>
 
-    <!-- Kontakt -->
-    <section id="kontakt" class="section">
-        <div class="container">
-            <div class="section-head reveal">
-                <h2>Zatražite ponudu</h2>
-                <p>Opišite ukratko što vam treba — javljamo se s prijedlogom i cijenom.</p>
-            </div>
+    <!-- Kontakt (dva koraka) -->
+    <section id="kontakt" class="section section--line">
+        <div class="container container--narrow">
+            <header class="sec-head reveal">
+                <span class="sec-kicker">Kontakt</span>
+                <h2>Zatražite ponudu.</h2>
+            </header>
 
-            <div class="contact-grid">
-                <aside class="contact-info reveal">
-                    <a class="contact-line" href="mailto:vpsolutions.booking@gmail.com">
-                        <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
-                        <span>vpsolutions.booking@gmail.com</span>
-                    </a>
-                    <div class="contact-line">
-                        <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
-                        <span>Osijek, Hrvatska</span>
+            <form class="form" id="contactForm" novalidate data-step="1">
+                <input type="text" name="hp" autocomplete="off" tabindex="-1" aria-hidden="true" class="hp-field" />
+                <input type="hidden" name="ts" value="" />
+                <input type="hidden" name="projectType" id="projectType" value="" />
+                <input type="hidden" name="utm" id="utmField" value="" />
+
+                <fieldset class="step step-1" id="step1">
+                    <legend class="field-label">1 · Što vam treba?</legend>
+                    <div class="choice-grid" id="choiceGrid" role="group" aria-label="Vrsta projekta">
+                        <button type="button" class="choice" data-value="Web stranica">Web stranica<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                        <button type="button" class="choice" data-value="Naručivanje za lokal">Naručivanje za lokal<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                        <button type="button" class="choice" data-value="Aplikacija">Aplikacija<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                        <button type="button" class="choice" data-value="Nešto drugo">Nešto drugo<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></button>
                     </div>
-                    <p class="contact-small">Odgovaramo na email u pravilu u roku 24 sata.</p>
-                </aside>
+                </fieldset>
 
-                <form class="contact-form" id="contactForm" novalidate>
-                    <!-- Honeypot i timestamp (anti-spam, umjesto CAPTCHA) -->
-                    <input type="text" name="hp" autocomplete="off" tabindex="-1" aria-hidden="true" class="hp-field" />
-                    <input type="hidden" name="ts" value="" />
-
-                    <label class="field">
-                        <span class="field-label">Ime i prezime</span>
-                        <input type="text" name="name" placeholder="Vaše ime i prezime" required>
-                    </label>
-                    <label class="field">
-                        <span class="field-label">Email</span>
-                        <input type="email" name="email" placeholder="email@primjer.hr" required>
-                    </label>
-
-                    <div class="field">
-                        <span class="field-label">Vrsta projekta <span class="field-optional">(opcionalno)</span></span>
-                        <div class="chips" id="projectChips" role="group" aria-label="Vrsta projekta">
-                            <button type="button" class="chip" data-value="Web stranica">Web stranica</button>
-                            <button type="button" class="chip" data-value="Online naručivanje">Online naručivanje</button>
-                            <button type="button" class="chip" data-value="Aplikacija / sustav">Aplikacija / sustav</button>
-                            <button type="button" class="chip" data-value="Automatizacija / AI">Automatizacija / AI</button>
-                            <button type="button" class="chip" data-value="Još ne znam">Još ne znam</button>
-                        </div>
-                        <input type="hidden" name="projectType" id="projectType" value="">
-                    </div>
-
-                    <label class="field">
-                        <span class="field-label">Poruka</span>
-                        <textarea name="message" placeholder="Opišite ukratko što vam treba..." rows="5" required></textarea>
-                    </label>
-
-                    <label class="gdpr">
-                        <input type="checkbox" name="gdpr" id="gdprConsent" required>
-                        <span>Slažem se s <a href="privacy.html" target="_blank" rel="noopener">Politikom privatnosti</a> i obradom osobnih podataka.</span>
-                    </label>
-
-                    <button type="submit" class="btn btn-primary btn-block">Pošalji upit</button>
+                <fieldset class="step step-2" id="step2">
+                    <button type="button" class="step-back" id="stepBack"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-left"/></svg> Natrag</button>
+                    <p class="step-chosen" id="stepChosen" aria-live="polite"></p>
+                    <label class="field"><span class="field-label">2 · Ime i prezime</span><input type="text" name="name" placeholder="Vaše ime i prezime" required></label>
+                    <label class="field"><span class="field-label">Email</span><input type="email" name="email" placeholder="email@primjer.hr" required></label>
+                    <label class="field"><span class="field-label">Poruka</span><textarea name="message" placeholder="Opišite ukratko što vam treba..." rows="5" required></textarea></label>
+                    <label class="gdpr"><input type="checkbox" name="gdpr" required><span>Slažem se s <a href="privacy.html" target="_blank" rel="noopener">Politikom privatnosti</a> i obradom osobnih podataka.</span></label>
+                    <button type="submit" class="btn btn-accent btn-block">Pošalji upit</button>
                     <div class="form-status" role="status" aria-live="polite"></div>
-                </form>
+                </fieldset>
+            </form>
+
+            <div class="contact-side reveal">
+                <a class="contact-line" href="mailto:vpsolutions.booking@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> vpsolutions.booking@gmail.com</a>
+                <span class="contact-line"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Osijek, Hrvatska</span>
             </div>
         </div>
     </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-inner">
-            <div class="footer-brand">
-                <a href="#home" class="logo"><span class="logo-mark">V</span><span class="logo-text">vpsolutions</span></a>
-                <p>Web stranice i aplikacije za obrte i male tvrtke. Osijek, Hrvatska.</p>
+            <div>
+                <a href="#top" class="brand"><span class="brand-mark">V</span><span class="brand-name">vpsolutions</span></a>
+                <p class="footer-tag">Web stranice i aplikacije za obrte i male tvrtke. Osijek, Hrvatska.</p>
             </div>
             <nav class="footer-links" aria-label="Footer navigacija">
                 <a href="#radovi">Radovi</a>
                 <a href="#usluge">Usluge</a>
                 <a href="#cjenik">Cjenik</a>
-                <a href="#faq">FAQ</a>
-                <a href="mailto:vpsolutions.booking@gmail.com">Email</a>
+                <a href="https://github.com/nacka301" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href="privacy.html">Politika privatnosti</a>
             </nav>
         </div>
-        <div class="container footer-bottom">
-            <p>&copy; <span id="year"></span> VP Solutions</p>
-        </div>
+        <div class="container footer-bottom"><p>&copy; <span id="year"></span> VP Solutions</p></div>
     </footer>
 
-    <!-- Sticky mobilni CTA (pojavljuje se nakon hero sekcije) -->
     <a href="#kontakt" class="sticky-cta" id="stickyCta" aria-hidden="true">Zatraži ponudu</a>
 
+    <!-- Animacije (progresivno poboljšanje) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="script.js" defer></script>
 </body>
 </html>
