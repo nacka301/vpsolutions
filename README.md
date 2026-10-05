@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # VP Solutions - Portfolio Web Stranica
 
 Moderna prezentacijska web stranica za usluge web developmenta, aplikacija i digitalnog marketinga.
@@ -15,11 +14,18 @@ Moderna prezentacijska web stranica za usluge web developmenta, aplikacija i dig
 ## 📁 Struktura projekta
 
 ```
-moja_stranica/
+vpsolutions/
 ├── index.html          # Glavna HTML stranica
+├── privacy.html        # Politika privatnosti
 ├── style.css           # CSS stilovi
 ├── script.js           # JavaScript funkcionalnosti
-├── vercel.json         # Vercel konfiguracija
+├── api/
+│   └── send-email.js   # Vercel serverless funkcija za kontakt formu (Brevo)
+├── images/             # Slike (og-image, portfolio)
+├── notes/              # Interne bilješke (SEO, Google My Business)
+├── sitemap.xml         # Sitemap
+├── robots.txt          # Upute za tražilice
+├── package.json        # Ovisnosti (sib-api-v3-sdk)
 └── README.md           # Dokumentacija
 ```
 
@@ -34,8 +40,6 @@ moja_stranica/
 ## 📱 Kontakt
 
 - **Email:** vpsolutions.booking@gmail.com
-- **Telefon:** +385 99 853 5380
-- **WhatsApp:** Dostupno na stranici
 
 ## 🌐 Deployment na Vercel
 
@@ -73,7 +77,7 @@ vercel --prod
 ## 🔧 Održavanje
 
 ### Promjena kontakt podataka:
-- Email i telefon: `index.html` (kontakt sekcija)
+- Email: `index.html` (kontakt sekcija) i `api/send-email.js` (adresa primatelja)
 - WhatsApp broj: `index.html` (floating button href)
 
 ### Dodavanje portfolio projekata:
@@ -108,6 +112,3 @@ vercel --prod
 
 **Izradio:** David
 **Made with ❤️ in Croatia**
-=======
-# vpsolutions
->>>>>>> 5bdcf2cd674c0ef51b0c167b0d37c8963e505c7a
