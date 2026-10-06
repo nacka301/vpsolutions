@@ -13,16 +13,9 @@
     <!-- no-JS -> JS prekidač (prije CSS-a da izbjegnemo bljesak) -->
     <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0YGB2DQ6Q"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-Z0YGB2DQ6Q');
-    </script>
+    <!-- Analytics i Meta Pixel se učitavaju tek nakon privole (consent.js) -->
 
-    <!-- Vercel Web Analytics -->
+    <!-- Vercel Web Analytics (privacy-friendly, bez kolačića) -->
     <script defer src="/_vercel/insights/script.js"></script>
 
     <!-- JSON-LD ProfessionalService -->
@@ -183,6 +176,7 @@
                             <div><dt>Uloga</dt><dd>Dizajn i razvoj (full-stack)</dd></div>
                             <div><dt>Tehnologije</dt><dd>Next.js · .NET · Supabase</dd></div>
                         </dl>
+                        <a class="link-arrow" href="radovi/pravotek.html" style="margin-right:22px">Case study <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                         <a class="link-arrow" href="https://pravotek.com" target="_blank" rel="noopener noreferrer">pravotek.com <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
                     </div>
                 </article>
@@ -199,6 +193,7 @@
                             <div><dt>Uloga</dt><dd>Dizajn i razvoj</dd></div>
                             <div><dt>Tehnologije</dt><dd>Web app · Vercel</dd></div>
                         </dl>
+                        <a class="link-arrow" href="radovi/narucivanje.html" style="margin-right:22px">Case study <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                         <a class="link-arrow" href="https://grillbox-hr.vercel.app/smash" target="_blank" rel="noopener noreferrer">grillbox-hr.vercel.app <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
                     </div>
                 </article>
@@ -215,6 +210,7 @@
                             <div><dt>Uloga</dt><dd>Dizajn i razvoj</dd></div>
                             <div><dt>Tehnologije</dt><dd>Web aplikacija · Vercel</dd></div>
                         </dl>
+                        <a class="link-arrow" href="radovi/znr.html" style="margin-right:22px">Case study <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                         <a class="link-arrow" href="https://znr-procjena-rizika.vercel.app" target="_blank" rel="noopener noreferrer">znr-procjena-rizika.vercel.app <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
                     </div>
                 </article>
@@ -448,6 +444,17 @@
     </footer>
 
     <a href="#kontakt" class="sticky-cta" id="stickyCta" aria-hidden="true">Zatraži ponudu</a>
+
+    <!-- Cookie privola -->
+    <div class="consent" id="consent" role="dialog" aria-label="Privola za kolačiće" aria-hidden="true">
+        <p>Koristim kolačiće za mjerenje posjećenosti i oglašavanje. Više u <a href="privacy.html">Politici privatnosti</a>.</p>
+        <div class="consent-actions">
+            <button type="button" class="btn btn-ghost btn-sm" id="consentDeny">Odbij</button>
+            <button type="button" class="btn btn-accent btn-sm" id="consentAccept">Prihvati</button>
+        </div>
+    </div>
+
+    <script src="consent.js" defer></script>
 
     <!-- Animacije (progresivno poboljšanje) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
