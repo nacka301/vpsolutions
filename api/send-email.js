@@ -78,7 +78,7 @@ module.exports = async function handler(req, res) {
 
   // Email koji će se poslati tebi
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
-  sendSmtpEmail.to = [{ email: 'vpsolutions.booking@gmail.com', name: 'VP Solutions' }];
+  sendSmtpEmail.to = [{ email: process.env.RECIPIENT_EMAIL || 'vackadavid@gmail.com', name: 'VP Solutions' }];
   sendSmtpEmail.sender = { email: 'vpsolutions.booking@gmail.com', name: 'VP Solutions Website' };
 
   if (isAudit) {
