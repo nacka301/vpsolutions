@@ -1,5 +1,6 @@
 // Lagana logika za oglasne stranice (bez GSAP-a): forma, sticky CTA, anti-spam.
 (function () {
+  var WEB3FORMS_KEY = '7e9b91d8-5669-4b96-9432-53ab8b53315a';
   var form = document.getElementById('adForm');
   var status = form ? form.querySelector('.form-status') : null;
   var sticky = document.getElementById('stickyCta');
@@ -48,20 +49,25 @@
       var msg = (fd.get('message') || '').toString();
       var message = (lines.length ? lines.join('\n') + '\n\n' : '') + msg;
 
+      // Honeypot
+      var hpVal = form.querySelector('input[name="hp"]') ? form.querySelector('input[name="hp"]').value : '';
+      if (hpVal) { showStatus('Hvala! Upit je poslan.', 'success'); form.reset(); btn.textContent = orig; btn.disabled = false; return; }
+
       var data = {
-        name: fd.get('name'), email: fd.get('email'), message: message,
-        hp: form.querySelector('input[name="hp"]') ? form.querySelector('input[name="hp"]').value : '',
-        ts: form.querySelector('input[name="ts"]') ? form.querySelector('input[name="ts"]').value : ''
+        access_key: WEB3FORMS_KEY,
+        subject: 'Novi upit — VP Solutions (oglas)',
+        from_name: 'VP Solutions web',
+        name: fd.get('name'), email: fd.get('email'), message: message
       };
       try {
-        var res = await fetch('/api/send-email', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
         var result = await res.json();
         if (res.ok && result.success) {
           last = now;
           showStatus('Hvala! Upit je poslan. Javljam se u najkraćem roku.', 'success');
           form.reset();
           if (typeof fbq === 'function') fbq('track', 'Lead');
-        } else { showStatus(result.error || 'Došlo je do greške. Pokušajte ponovno.', 'error'); }
+        } else { showStatus(result.message || 'Došlo je do greške. Pokušajte ponovno.', 'error'); }
       } catch (err) { showStatus('Greška u mreži. Pišite mi na email.', 'error'); }
       btn.textContent = orig; btn.disabled = false;
     });

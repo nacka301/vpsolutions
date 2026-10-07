@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "VP Solutions - Web Development Portfolio",
   "scripts": {
-    "dev": "python -m http.server 8000",
-    "vercel-dev": "vercel dev"
-  },
-  "dependencies": {
-    "sib-api-v3-sdk": "^8.5.0"
+    "dev": "python -m http.server 8000"
   }
 }
